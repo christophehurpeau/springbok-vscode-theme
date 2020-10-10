@@ -1,0 +1,29 @@
+{
+    "name": "springbok-theme",
+    "displayName": "Springbok Theme",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.47.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "prettier": {
+        "singleQuote": true
+    },
+    "contributes": {
+        "themes": [
+            {
+                "label": "Springbok Theme",
+                "uiTheme": "vs-dark",
+                "path": "./themes/Springbok Theme-color-theme.json"
+            }
+        ]
+    },
+    "devDependencies": {
+        "@types/react": "^16.9.46",
+        "@types/react-dom": "^16.9.8",
+        "prettier": "^2.0.5"
+    }
+}
