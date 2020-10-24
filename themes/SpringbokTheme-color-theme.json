@@ -122,18 +122,18 @@
       "bold": true
     },
     "class.defaultLibrary": {
-      "foreground": "#B52A26"
+      "foreground": "#F57773"
     },
     "function": {
       "foreground": "#FFDBA3"
     },
     "function.defaultLibrary": {
-      "foreground": "#B52A26",
+      "foreground": "#F57773",
       "fontStyle": "bold"
     },
     /* -- Variables -- */
     "variable.defaultLibrary": {
-      "foreground": "#B52A26"
+      "foreground": "#F57773"
     },
     // "variable.local": {
     //   "foreground": "#be5555"
