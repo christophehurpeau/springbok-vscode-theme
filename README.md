@@ -1,20 +1,20 @@
 # springbok-theme
 
-## Primary color: Variables
-
-shade 0 = #D34B47
-shade 1 = #FFA5A3
-shade 2 = #F57773
-shade 3 = #B52A26
-shade 4 = #8F100C
-
-## Secondary color (1): Keywords
+## Primary color: Keywords
 
 shade 0 = #D37947
 shade 1 = #FFC4A3
 shade 2 = #F5A273
 shade 3 = #B55A26
 shade 4 = #8F3C0C
+
+## Secondary color (1): Default Library
+
+shade 0 = #D34B47
+shade 1 = #FFA5A3
+shade 2 = #F57773
+shade 3 = #B52A26
+shade 4 = #8F100C
 
 ## Secondary color (2): Functions
 
