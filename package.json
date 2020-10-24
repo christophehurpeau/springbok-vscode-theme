@@ -5,12 +5,18 @@
   "repository": "christophehurpeau/springbok-vscode-theme",
   "description": "Springbok Theme",
   "version": "0.1.2",
+  "license": "MIT",
+  "icon": "images/springbok-logo.png",
   "engines": {
     "vscode": "^1.47.0"
   },
   "categories": [
     "Themes"
   ],
+  "galleryBanner": {
+    "color": "#B55A26",
+    "theme": "dark"
+  },
   "prettier": {
     "singleQuote": true
   },
