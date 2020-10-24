@@ -1,0 +1,30 @@
+:root {
+  --main-bg-color: brown;
+}
+
+#id {
+  color: #fff;
+}
+
+.className {
+  width: calc(100% / 2);
+}
+
+div,
+main {
+  color: #fff;
+}
+
+div[data-testid='id'] {
+  color: #fff;
+}
+
+.one {
+  --test: 10px;
+  color: white;
+  background-color: var(--main-bg-color);
+  margin: var(--test);
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+}
