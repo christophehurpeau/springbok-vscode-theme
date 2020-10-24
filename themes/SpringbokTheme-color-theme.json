@@ -399,7 +399,8 @@
         "storage.type.interface",
         "storage.type.type",
         "meta.interface storage.modifier",
-        "keyword.operator.expression.typeof"
+        "keyword.operator.expression.typeof",
+        "keyword.operator.expression.keyof"
       ],
       "settings": {
         "foreground": "#19765D",

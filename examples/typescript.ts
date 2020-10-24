@@ -17,8 +17,6 @@ class UserAccount {
 
 const user: User = new UserAccount('Murphy', 1);
 
-type UserType = typeof user;
-
 type MyBool = true | false;
 type WindowStates = 'open' | 'closed' | 'minimized';
 type LockStates = 'locked' | 'unlocked';
@@ -66,7 +64,6 @@ let sym1 = Symbol();
 
 let regexp = /some-(regexp)[a-z]+/;
 
-
 const c = 'c';
 const d = 'd' as const;
 
@@ -77,4 +74,6 @@ const record = {
   d,
   e: c,
   f: c,
-}
+};
+
+type RecordKeys = keyof typeof user;
