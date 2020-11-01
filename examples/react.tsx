@@ -1,14 +1,25 @@
-import type { ReactElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import React, { ReactElement, Component, useState } from 'react';
 import ReactDOM from 'react-dom';
+
+type HandleTick = () => void;
+
+interface TimerProps {
+  onTick?: () => void;
+}
+
+interface TimerProps2 {
+  onTick?: HandleTick;
+}
 
 interface TimerState {
   seconds: number;
 }
 
-class Timer extends Component {
+class Timer extends Component<TimerProps, TimerState> {
   state: TimerState;
   initialValue = 0;
+  interval: ReturnType<typeof setInterval>;
 
   constructor(readonly props) {
     super(props);
@@ -19,6 +30,7 @@ class Timer extends Component {
     this.setState((state) => ({
       seconds: state.seconds + 1,
     }));
+    if (this.props.onTick) this.props.onTick();
   }
 
   componentDidMount() {
@@ -36,6 +48,21 @@ class Timer extends Component {
 
 ReactDOM.render(<Timer />, document.getElementById('timer-example'));
 
+const Layout = ({
+  title,
+  children,
+}: {
+  title: ReactNode;
+  children: ReactNode;
+}) => {
+  return (
+    <main>
+      <div>{title}</div>
+      {children}
+    </main>
+  );
+};
+
 // https://reactjs.org/docs/hooks-intro.html
 
 function Example(): ReactElement {
@@ -43,10 +70,10 @@ function Example(): ReactElement {
   const [count, setCount] = useState(0);
 
   return (
-    <div>
+    <Layout title={<div>Layout ({count})</div>}>
       <p>You clicked {count} times</p>
       <button onClick={() => setCount(count + 1)}>Click me</button>
-    </div>
+    </Layout>
   );
 }
 
