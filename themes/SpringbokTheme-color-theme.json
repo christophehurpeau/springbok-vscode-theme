@@ -157,12 +157,13 @@
     /* -- Values -- */
 
     /* Boolean */
-    {
-      "scope": ["constant.language.boolean"],
-      "settings": {
-        "foreground": "#5BC161"
-      }
-    },
+    // Booleans are not always detected, also green is confusing with types
+    // {
+    //   "scope": ["constant.language.boolean"],
+    //   "settings": {
+    //     "foreground": "#5BC161"
+    //   }
+    // },
 
     /* Numeric */
     {
@@ -353,6 +354,23 @@
         "foreground": "#B57E26"
       }
     },
+
+    {
+      "scope": ["entity.name.function.preprocessor"],
+      "settings": {
+        "foreground": "#B83E6B",
+        "fontStyle": "bold"
+      }
+    },
+
+    {
+      "scope": ["entity.name.type.class"],
+      "settings": {
+        "foreground": "#fff",
+        "fontStyle": "bold"
+      }
+    },
+
     /* -- Variables -- */
     {
       "name": "Language",
@@ -395,12 +413,20 @@
 
     /* -- Types -- */
     {
+      "scope": ["entity.name.type"],
+      "settings": {
+        "foreground": "#4CA089"
+      }
+    },
+    {
       "scope": [
         "storage.type.interface",
         "storage.type.type",
+        "storage.type.built-in",
         "meta.interface storage.modifier",
         "keyword.operator.expression.typeof",
-        "keyword.operator.expression.keyof"
+        "keyword.operator.expression.keyof",
+        "keyword.control.as"
       ],
       "settings": {
         "foreground": "#19765D",

@@ -1,5 +1,5 @@
 import type { ReactElement, ReactNode } from 'react';
-import React, { ReactElement, Component, useState } from 'react';
+import React, { Component, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 type HandleTick = () => void;
@@ -33,11 +33,11 @@ class Timer extends Component<TimerProps, TimerState> {
     if (this.props.onTick) this.props.onTick();
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.interval = setInterval(() => this.tick(), 1000);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     clearInterval(this.interval);
   }
 
@@ -54,7 +54,7 @@ const Layout = ({
 }: {
   title: ReactNode;
   children: ReactNode;
-}) => {
+}): ReactElement => {
   return (
     <main>
       <div>{title}</div>
