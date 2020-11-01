@@ -188,10 +188,7 @@
     },
     {
       "name": "String interpolation",
-      "scope": [
-        "punctuation.definition.template-expression",
-        "punctuation.section.embedded"
-      ],
+      "scope": ["punctuation.definition.template-expression"],
       "settings": {
         "foreground": "#ff6a14"
       }
@@ -448,6 +445,22 @@
       "scope": "support.class.component",
       "settings": {
         "foreground": "#FFDBA3"
+      }
+    },
+    {
+      "scope": ["meta.tag.attributes punctuation.section.embedded"],
+      "settings": {
+        "foreground": "#eeeeff"
+      }
+    },
+    {
+      "name": "String interpolation",
+      "scope": [
+        "meta.jsx.children punctuation.section.embedded",
+        "meta.tag.attributes meta.jsx.children punctuation.section.embedded"
+      ],
+      "settings": {
+        "foreground": "#ff6a14"
       }
     },
 
