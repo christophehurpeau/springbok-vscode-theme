@@ -116,6 +116,9 @@
     "type": {
       "foreground": "#4CA089"
     },
+    "interface": {
+      "foreground": "#7CC2AF"
+    },
     /* -- Entities -- */
     "class": {
       "foreground": "#fff",
