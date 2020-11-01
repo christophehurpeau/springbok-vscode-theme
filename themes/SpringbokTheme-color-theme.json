@@ -78,8 +78,8 @@
     "merge.incomingContentBackground": "#051a25",
 
     "statusBar.background": "#363636",
+    "statusBar.noFolderBackground": "#717171",
     "statusBar.debuggingBackground": "#8F100C",
-    "statusBar.noFolderForeground": "#363636",
     "statusBarItem.remoteBackground": "#8F3C0C",
     "statusBarItem.remoteForeground": "#FFF",
 
