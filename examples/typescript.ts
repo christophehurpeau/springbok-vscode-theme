@@ -82,3 +82,8 @@ const record = {
 };
 
 type RecordKeys = keyof typeof user;
+console.log(typeof user);
+
+function getUser(): typeof user {
+  return user;
+}

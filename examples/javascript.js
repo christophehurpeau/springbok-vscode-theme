@@ -42,18 +42,15 @@ function error(message) {
   throw new Error(message);
 }
 
-console.log(process.env.NODE_ENV);
+console.log(typeof process.env.NODE_ENV);
 
 let sym1 = Symbol();
 
 let regexp = /some-(regexp)[a-z]\\.+/;
 
-
 /**
  * @deprecated do not use that
  */
-const deprecatedMethod = () => {
-
-};
+const deprecatedMethod = () => {};
 
 deprecatedMethod();
