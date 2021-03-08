@@ -1,3 +1,8 @@
+import fs from 'fs';
+
+const readFileSync: typeof fs.readFileSync = fs.readFileSync;
+readFileSync('package.json');
+
 interface User {
   name: string;
   id: number;

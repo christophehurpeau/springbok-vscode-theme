@@ -453,6 +453,12 @@
       }
     },
     {
+      "scope": "entity.name.type.module",
+      "settings": {
+        "foreground": "#ddddee"
+      }
+    },
+    {
       "scope": ["support.type.builtin", "support.type.primitive"],
       "settings": {
         "foreground": "#4CA089",
