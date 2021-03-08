@@ -30,7 +30,9 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "prettier --check 'themes/**/*.json'"
+    "vscode:prepublish": "prettier --check 'themes/**/*.json'",
+    "publish-patch": "vsce publish patch",
+    "publish-minor": "vsce publish minor  "
   },
   "devDependencies": {
     "@types/react": "^16.9.53",
