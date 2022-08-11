@@ -504,6 +504,20 @@
       }
     },
 
+    /* -- dotenv -- */
+    {
+      "scope": ["variable.other.env"],
+      "settings": {
+        "foreground": "#B57E26"
+      }
+    },
+    {
+      "scope": ["source.env"],
+      "settings": {
+        "foreground": "#FFA014"
+      }
+    },
+
     /* -- Markdown -- */
     {
       "scope": ["markup.heading"],
