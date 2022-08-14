@@ -1,7 +1,9 @@
+#include <stdio.h>
 
 #define STATION_NAME "Station5"
 #define STATION_RESOURCES_SIZE 2
 #define STATION_MAC_ADDRESS 0x74,0x69,0x69,0x2D,0x30,0x34
+#define AREA(s) (s * s) // macro with argument
 
 class Resource {
   public:

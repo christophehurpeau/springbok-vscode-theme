@@ -4,6 +4,7 @@
   "publisher": "chrp",
   "repository": "christophehurpeau/springbok-vscode-theme",
   "description": "Springbok Theme",
+  "type": "module",
   "version": "0.1.6",
   "license": "MIT",
   "icon": "images/springbok-logo.png",
@@ -30,9 +31,8 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "prettier --check 'themes/**/*.json'",
     "publish-patch": "vsce publish patch",
-    "publish-minor": "vsce publish minor  "
+    "publish-minor": "vsce publish minor"
   },
   "devDependencies": {
     "@types/react": "^16.9.53",

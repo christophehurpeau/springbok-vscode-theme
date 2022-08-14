@@ -6,6 +6,8 @@ readFileSync('package.json');
 interface User {
   name: string;
   id: number;
+  /** @deprecated should not be used */
+  deprecatedParameter?: string;
 }
 
 class UserAccount {
@@ -21,6 +23,7 @@ class UserAccount {
 }
 
 const user: User = new UserAccount('Murphy', 1);
+console.log(user.deprecatedParameter);
 
 type MyBool = true | false;
 type WindowStates = 'open' | 'closed' | 'minimized';
@@ -81,7 +84,7 @@ const record = {
   f: c,
 };
 
-type RecordKeys = keyof typeof user;
+export type RecordKeys = keyof typeof user;
 console.log(typeof user);
 
 function getUser(): typeof user {
