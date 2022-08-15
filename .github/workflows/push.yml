@@ -30,6 +30,9 @@ jobs:
       - name: Install Dependencies
         run: yarn install --prefer-offline --pure-lockfile
 
+      - name: Check prettier
+        run: yarn install lint:prettier
+
       - uses: GoogleCloudPlatform/release-please-action@v2
         if: ${{ github.ref == 'refs/heads/main' }}
         id: release
