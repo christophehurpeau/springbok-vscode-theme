@@ -72,7 +72,9 @@ function Example(): ReactElement {
   return (
     <Layout title={<div>Layout ({count})</div>}>
       <p>You clicked {count} times</p>
-      <button disabled onClick={() => setCount(count + 1)}>Click me</button>
+      <button disabled onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
     </Layout>
   );
 }

@@ -31,6 +31,7 @@
     ]
   },
   "scripts": {
+    "vscode:prepublish": "prettier --check .",
     "publish-patch": "vsce publish patch",
     "publish-minor": "vsce publish minor"
   },
