@@ -2,4 +2,4 @@
 
 ## Preview
 
-![Preview](https://raw.githubusercontent.com/christophehurpeau/springbok-vscode-theme/main/previews/preview-typescript.jpg)
+![Preview](https://raw.githubusercontent.com/christophehurpeau/springbok-vscode-theme/main/previews/preview-typescript.png)
