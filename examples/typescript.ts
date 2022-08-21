@@ -45,7 +45,7 @@ interface ExtendedPoint extends Point {
 }
 
 function printPoint(p: Point) {
-  console.log(`${p.x as StringArray}, ${p.y}`);
+  console.log(`${p.x as unknown as StringArray}, ${p.y}`);
 }
 
 enum UserResponse {
