@@ -190,6 +190,7 @@ const theme = {
     'terminal.ansiBrightMagenta': palette.magenta.light,
     'terminal.ansiBrightCyan': palette.cyan.light,
     'terminal.ansiBrightWhite': palette.white.light,
+    'terminal.selectionBackground': '#F5A27326',
   },
   semanticTokenColors: {
     /* -- Values -- */

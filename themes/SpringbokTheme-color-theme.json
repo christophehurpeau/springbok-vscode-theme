@@ -86,7 +86,8 @@
     "terminal.ansiBrightBlue": "#5c88e7",
     "terminal.ansiBrightMagenta": "#e5578b",
     "terminal.ansiBrightCyan": "#54cbdd",
-    "terminal.ansiBrightWhite": "#FFFFFF"
+    "terminal.ansiBrightWhite": "#FFFFFF",
+    "terminal.selectionBackground": "#F5A27326"
   },
   "semanticTokenColors": {
     "enumMember": {
