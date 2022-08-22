@@ -4,6 +4,13 @@ All notable changes to the "springbok-theme" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+### [0.3.2](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.3.1...v0.3.2) (2022-08-22)
+
+
+### Bug Fixes
+
+* fix terminal.selectionBackground color ([a9dd74d](https://www.github.com/christophehurpeau/springbok-vscode-theme/commit/a9dd74dcb306091414ad4b623e81f2f0ec7e5495))
+
 ### [0.3.1](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.3.0...v0.3.1) (2022-08-15)
 
 

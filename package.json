@@ -5,7 +5,7 @@
   "repository": "christophehurpeau/springbok-vscode-theme",
   "description": "Springbok Theme",
   "type": "module",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "license": "MIT",
   "icon": "images/springbok-logo.png",
   "engines": {
