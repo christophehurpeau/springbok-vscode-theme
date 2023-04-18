@@ -36,7 +36,7 @@
     "sideBarTitle.foreground": "#999999",
     "editor.background": "#131313",
     "editor.foreground": "#cccccd",
-    "editor.selectionBackground": "#F5A27326",
+    "editor.selectionBackground": "#f5a37331",
     "editor.inactiveSelectionBackground": "#363431",
     "editor.wordHighlightBackground": "#333837",
     "editor.wordHighlightStrongBackground": "#395550",
@@ -113,7 +113,7 @@
       "fontStyle": "bold"
     },
     "function": {
-      "foreground": "#b48ae0"
+      "foreground": "#bf95ed"
     },
     "function.defaultLibrary": {
       "foreground": "#E2504B",
@@ -328,7 +328,7 @@
         "entity.name.function"
       ],
       "settings": {
-        "foreground": "#b48ae0",
+        "foreground": "#bf95ed",
         "fontStyle": "bold"
       }
     },
@@ -369,7 +369,7 @@
         "variable.object.property"
       ],
       "settings": {
-        "foreground": "#ccccdd"
+        "foreground": "#d7d7ee"
       }
     },
     {
@@ -552,7 +552,7 @@
         "source.css support.function"
       ],
       "settings": {
-        "foreground": "#b48ae0"
+        "foreground": "#bf95ed"
       }
     }
   ]
