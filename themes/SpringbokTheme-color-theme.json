@@ -47,6 +47,8 @@
     "editor.selectionHighlightBackground": "#333837",
     "editor.rangeHighlightBackground": "#212423",
     "editor.symbolHighlightBackground": "#212423",
+    "editorInlayHint.background": "#444",
+    "editorInlayHint.foreground": "#cccccd",
     "editorWhitespace.foreground": "#414141",
     "editorBracketMatch.border": "#eee",
     "editorIndentGuide.activeBackground": "#abababa4",
