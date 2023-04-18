@@ -4,6 +4,18 @@ All notable changes to the "springbok-theme" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.4.0](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.3.2...v0.4.0) (2023-04-18)
+
+
+### Features
+
+* configure editorInlayHint ([2c20e31](https://www.github.com/christophehurpeau/springbok-vscode-theme/commit/2c20e31b0e4116a9c74259e68a7dd00dacd45c46))
+
+
+### Bug Fixes
+
+* improve color contrast ([15e53a6](https://www.github.com/christophehurpeau/springbok-vscode-theme/commit/15e53a65aa0e8a1a0719b25a329fb0e47ded0f40))
+
 ### [0.3.2](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.3.1...v0.3.2) (2022-08-22)
 
 
