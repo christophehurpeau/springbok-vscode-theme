@@ -4,6 +4,13 @@ All notable changes to the "springbok-theme" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.5.0](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.4.0...v0.5.0) (2024-05-03)
+
+
+### Features
+
+* improve inactiveSelectionBackground ([d276746](https://www.github.com/christophehurpeau/springbok-vscode-theme/commit/d276746a8aa018db49e061baf0918dea1d073c64))
+
 ## [0.4.0](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.3.2...v0.4.0) (2023-04-18)
 
 
