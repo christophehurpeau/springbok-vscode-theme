@@ -90,3 +90,40 @@ console.log(typeof user);
 function getUser(): typeof user {
   return user;
 }
+
+
+namespace MyNamespace {
+  export class MyClass {
+    private myProperty: string;
+
+    constructor(initialValue: string) {
+      this.myProperty = initialValue;
+    }
+
+    public getMyProperty(): string {
+      return this.myProperty;
+    }
+
+    public setMyProperty(value: string): void {
+      this.myProperty = value;
+    }
+
+    public static myStaticMethod(): string {
+      return "This is a static method";
+    }
+  }
+
+  export interface MyInterface {
+    myInterfaceProperty: number;
+    myInterfaceMethod(): void;
+  }
+
+  export const myConstant: string = "This is a constant";
+}
+
+// Usage example
+const myInstance = new MyNamespace.MyClass("Initial Value");
+console.log(myInstance.getMyProperty());
+myInstance.setMyProperty("New Value");
+console.log(myInstance.getMyProperty());
+console.log(MyNamespace.MyClass.myStaticMethod());

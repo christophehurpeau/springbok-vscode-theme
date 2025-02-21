@@ -54,3 +54,17 @@ let regexp = /some-(regexp)[a-z]\\.+/;
 const deprecatedMethod = () => {};
 
 deprecatedMethod();
+
+
+// check activeBackgroundX
+if (true) {
+  if (true) {
+    {
+      {
+        {
+          {}
+        }
+      }
+    }
+  }
+}
