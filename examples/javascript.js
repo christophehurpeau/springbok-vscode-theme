@@ -55,14 +55,14 @@ const deprecatedMethod = () => {};
 
 deprecatedMethod();
 
-
 // check activeBackgroundX
 if (true) {
   if (true) {
     {
       {
         {
-          {}
+          {
+          }
         }
       }
     }

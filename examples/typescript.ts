@@ -91,7 +91,6 @@ function getUser(): typeof user {
   return user;
 }
 
-
 namespace MyNamespace {
   export class MyClass {
     private myProperty: string;
@@ -109,7 +108,7 @@ namespace MyNamespace {
     }
 
     public static myStaticMethod(): string {
-      return "This is a static method";
+      return 'This is a static method';
     }
   }
 
@@ -118,12 +117,12 @@ namespace MyNamespace {
     myInterfaceMethod(): void;
   }
 
-  export const myConstant: string = "This is a constant";
+  export const myConstant: string = 'This is a constant';
 }
 
 // Usage example
-const myInstance = new MyNamespace.MyClass("Initial Value");
+const myInstance = new MyNamespace.MyClass('Initial Value');
 console.log(myInstance.getMyProperty());
-myInstance.setMyProperty("New Value");
+myInstance.setMyProperty('New Value');
 console.log(myInstance.getMyProperty());
 console.log(MyNamespace.MyClass.myStaticMethod());

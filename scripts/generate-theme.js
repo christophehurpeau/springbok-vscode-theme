@@ -685,5 +685,5 @@ const theme = {
 
 fs.writeFileSync(
   new URL('../themes/SpringbokTheme-color-theme.json', import.meta.url),
-  JSON.stringify(theme, null, 2)
+  JSON.stringify(theme, null, 2),
 );

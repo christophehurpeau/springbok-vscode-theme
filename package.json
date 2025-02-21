@@ -38,7 +38,8 @@
   "devDependencies": {
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
-    "prettier": "2.7.1",
+    "prettier": "3.5.1",
     "vsce": "2.10.0"
-  }
+  },
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }
