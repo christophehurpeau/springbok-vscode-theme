@@ -36,7 +36,7 @@ const palette = {
   purple: {
     dark: '#6b26b5',
     light: '#8a46d2',
-    xlight: '#b48ae0',
+    xlight: '#bf95ed',
   },
 
   black: { dark: '#383838', light: '#797979' },
@@ -46,10 +46,12 @@ const palette = {
   blue: { dark: '#2653b5', light: '#5c88e7' },
   magenta: { dark: '#a51449', light: '#e5578b' },
   cyan: { dark: '#26a2b5', light: '#54cbdd' },
-  white: { dark: '#D7D7D7', light: '#FFFFFF' },
+  white: { dark: '#D7D7D7', light: '#efefef', xlight: '#ffffff' },
 };
 
 const colors = {
+  focus: palette.springbok.dark,
+  error: palette.red.dark,
   links: {
     default: palette.springbok.dark,
     active: palette.springbok.light,
@@ -57,7 +59,7 @@ const colors = {
   buttons: {
     background: palette.springbok.darker,
     hoverBackground: palette.springbok.dark,
-    foreground: '#eee',
+    foreground: palette.white.light,
   },
   keywords: {
     default: palette.springbok.light,
@@ -68,7 +70,7 @@ const colors = {
     property: palette.sky.light,
   },
   classes: {
-    name: '#fff',
+    name: palette.white.xlight,
     defaultLibrary: palette.red.light,
   },
   functions: {
@@ -86,9 +88,11 @@ const theme = {
   type: 'dark',
   semanticHighlighting: true,
   colors: {
-    focusBorder: '#724025',
-
+    focusBorder: colors.focus,
+    foreground: '#eeeeee',
+    errorForeground: colors.error,
     'selection.background': '#d3784780',
+    'icon.foreground': palette.white.light,
 
     'textLink.foreground': colors.links.default,
     'textLink.activeForeground': colors.links.active,
@@ -99,6 +103,22 @@ const theme = {
     'checkbox.background': palette.springbok.darker,
 
     'progressBar.background': palette.springbok.dark,
+
+    'inputOption.activeBorder': '#B55A26',
+    'inputOption.activeBackground': '#B55A26',
+    'inputOption.activeForeground': '#eeeeee',
+    'inputOption.hoverBackground': '#332c28',
+    'inputValidation.errorBorder': palette.red.dark,
+    'inputValidation.errorBackground': palette.red.dark,
+    'inputValidation.errorForeground': palette.white.light,
+    'inputValidation.infoBorder': palette.blue.dark,
+    'inputValidation.infoBackground': palette.blue.dark,
+    'inputValidation.infoForeground': palette.white.light,
+    'inputValidation.warningBorder': '#9b8613',
+    'inputValidation.warningBackground': '#9b8613',
+    'inputValidation.warningForeground': palette.white.light,
+    'badge.background': '#B55A26',
+    'badge.foreground': palette.white.light,
 
     'list.activeSelectionBackground': palette.springbok.darkest,
     'list.inactiveSelectionBackground': palette.springbok.darkest,
@@ -117,19 +137,66 @@ const theme = {
     // gitDecoration.ignoredResourceForeground
     // gitDecoration.submoduleResourceForeground
 
+    'activityBar.background': '#181818',
+    'activityBar.foreground': '#efefef',
+    'activityBar.inactiveForeground': '#9f9f9f',
     'activityBar.activeBorder': palette.springbok.dark,
     'activityBar.dropBorder': palette.springbok.dark,
+    'activityBarTop.background': '#181818',
+    'activityBarTop.foreground': '#efefef',
+    'activityBarTop.inactiveForeground': '#9f9f9f',
+    'activityBarTop.activeBorder': palette.springbok.dark,
     'activityBarBadge.background': palette.springbok.dark,
-
-    'sideBar.background': '#1f1f1f',
-    'sideBar.foreground': '#cccccd',
-    'sideBarSectionHeader.background': '#1f1f1f',
-    'sideBarSectionHeader.foreground': '#aaaaaa',
+    'activityBarBadge.foreground': '#efefef',
+    'activityErrorBadge.foreground': '#efefef',
+    'activityErrorBadge.background': '#B52A26',
+    'activityWarningBadge.foreground': '#efefef',
+    'activityWarningBadge.background': '#9b8613',
+    'titleBar.activeBackground': '#181818',
+    'titleBar.activeForeground': '#e0e0e0',
+    'titleBar.inactiveBackground': '#2f2f2f',
+    'titleBar.inactiveForeground': '#9f9f9f',
+    'titleBar.border': '#2f2f2f',
+    'menu.background': '#181818',
+    'menu.foreground': '#e0e0e0',
+    'menu.selectionBackground': '#552407',
+    'menu.selectionForeground': '#efefef',
+    'menu.separatorBackground': '#2f2f2f',
+    'commandCenter.foreground': '#efefef',
+    'commandCenter.background': '#2f2f2f',
+    'commandCenter.border': '#2f2f2f',
+    'commandCenter.inactiveForeground': '#9f9f9f',
+    'commandCenter.inactiveBorder': '#2f2f2f',
+    'commandCenter.debuggingBackground': '#8F100C90',
+    'sideBar.background': '#181818',
+    'sideBar.foreground': '#efefef',
+    'sideBar.border': '#2f2f2f',
+    'sideBarTitle.background': '#181818',
+    'sideBarSectionHeader.background': '#181818',
+    'sideBarSectionHeader.foreground': '#e0e0e0',
     'sideBarTitle.foreground': '#999999',
-
-    'editor.background': '#131313',
-    'editor.foreground': '#cccccd',
-    'editor.selectionBackground': '#F5A27326',
+    'panel.background': '#181818',
+    'panel.border': '#2f2f2f',
+    'panelTitle.activeBorder': '#B55A26',
+    'panelTitle.activeForeground': '#efefef',
+    'panelTitle.inactiveForeground': '#9f9f9f',
+    'panelSection.border': '#2f2f2f',
+    'keybindingLabel.background': '#51515180',
+    'keybindingLabel.foreground': '#e0e0e0',
+    'keybindingLabel.border': '#81818180',
+    'keybindingLabel.bottomBorder': '#41414190',
+    'sideBySideEditor.horizontalBorder': '#2f2f2f',
+    'sideBySideEditor.verticalBorder': '#2f2f2f',
+    'breadcrumb.background': '#181818',
+    'breadcrumb.foreground': '#e0e0e0',
+    'breadcrumb.focusForeground': '#efefef',
+    'breadcrumb.activeSelectionForeground': '#efefef',
+    'breadcrumbPicker.background': '#181818',
+    'editorGroup.border': '#2f2f2f',
+    'outputView.background': '#080808',
+    'editor.background': '#080808',
+    'editor.foreground': '#e0e0e0',
+    'editor.selectionBackground': '#f5a37331',
     'editor.inactiveSelectionBackground': '#363431',
     'editor.wordHighlightBackground': '#333837',
     'editor.wordHighlightStrongBackground': '#395550',
@@ -137,17 +204,25 @@ const theme = {
     'editor.findMatchBackground': '#1d5042',
     'editor.findMatchHighlightBackground': '#1e332d',
 
-    'editor.lineHighlightBackground': '#202020',
+    'editor.lineHighlightBackground': '#181818',
     'editor.selectionHighlightBackground': '#333837',
     'editor.rangeHighlightBackground': '#212423',
     'editor.symbolHighlightBackground': '#212423',
 
+    'editorGutter.background': '#1a1a1a',
+    'editorGutter.modifiedBackground': '#dac84e',
+    'editorGutter.addedBackground': '#4dd852',
+    'editorGutter.deletedBackground': '#E2504B',
+    'editorGutter.commentRangeForeground': '#707070',
+
+    'editorInlayHint.background': '#444',
+    'editorInlayHint.foreground': '#e0e0e0',
+
     'editorWhitespace.foreground': '#414141',
     'editorBracketMatch.border': '#eee',
-    'editorIndentGuide.activeBackground': '#abababa4',
-
-    'diffEditor.insertedTextBackground': '#143017',
-    'diffEditor.removedTextBackground': '#531412',
+    'editorIndentGuide.activeBackground': '#B0BEC5A4',
+    'diffEditor.insertedTextBackground': '#4dd85220',
+    'diffEditor.removedTextBackground': '#E2504B20',
 
     'peekView.border': palette.springbok.darker,
     'peekViewTitle.background': '#531412',
@@ -159,18 +234,22 @@ const theme = {
     'peekViewResult.matchHighlightBackground': '#1e332d',
     'peekViewResult.selectionBackground': palette.springbok.darker,
 
-    'merge.currentHeaderBackground': '#0A7111',
-    'merge.currentContentBackground': '#042706',
-    'merge.incomingHeaderBackground': '#0C405B',
-    'merge.incomingContentBackground': '#051a25',
+    'merge.currentHeaderBackground': '#26a2b590',
+    'merge.currentContentBackground': '#26a2b560',
+    'merge.incomingHeaderBackground': '#2653b590',
+    'merge.incomingContentBackground': '#2653b560',
+    'merge.commonHeaderBackground': '#b5a22690',
+    'merge.commonContentBackground': '#b5a22660',
 
-    'statusBar.background': '#363636',
+    'statusBar.background': '#1a1a1a',
+    'statusBar.foreground': '#e0e0e0',
+    'statusBar.border': '#2f2f2f',
     'statusBar.noFolderBackground': '#717171',
     'statusBar.debuggingBackground': '#8F100C',
     'statusBarItem.remoteBackground': palette.springbok.darker,
-    'statusBarItem.remoteForeground': '#FFF',
+    'statusBarItem.remoteForeground': '#dac84e',
 
-    'settings.modifiedItemIndicator': palette.springbok.dark,
+    'settings.modifiedItemIndicator': '#dac84e',
 
     'terminal.background': '#000000',
     'terminal.foreground': '#F5F5F5',
@@ -189,7 +268,7 @@ const theme = {
     'terminal.ansiBrightBlue': palette.blue.light,
     'terminal.ansiBrightMagenta': palette.magenta.light,
     'terminal.ansiBrightCyan': palette.cyan.light,
-    'terminal.ansiBrightWhite': palette.white.light,
+    'terminal.ansiBrightWhite': palette.white.xlight,
     'terminal.selectionBackground': '#F5A27326',
     'terminal.inactiveSelectionBackground': '#363431',
   },
@@ -402,14 +481,6 @@ const theme = {
       },
     },
 
-    {
-      scope: ['punctuation.definition.block'],
-      settings: {
-        foreground: '#D7D7D7',
-        fontStyle: '',
-      },
-    },
-
     /* -- Entities -- */
     {
       name: 'Attributes',
@@ -438,7 +509,7 @@ const theme = {
     {
       scope: ['entity.name.type.class'],
       settings: {
-        foreground: '#fff',
+        foreground: palette.white.xlight,
         fontStyle: 'bold',
       },
     },
@@ -464,7 +535,7 @@ const theme = {
       name: 'Parameter',
       scope: ['variable.parameter'],
       settings: {
-        foreground: '#d7d7ee',
+        foreground: palette.white.light,
         fontStyle: 'italic',
       },
     },
@@ -483,7 +554,7 @@ const theme = {
         'variable.object.property',
       ],
       settings: {
-        foreground: '#ccccdd',
+        foreground: palette.white.light,
       },
     },
     /* Variables: imports */
