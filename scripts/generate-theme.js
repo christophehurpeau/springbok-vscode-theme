@@ -46,7 +46,7 @@ const palette = {
   blue: { dark: '#2653b5', light: '#5c88e7' },
   magenta: { dark: '#a51449', light: '#e5578b' },
   cyan: { dark: '#26a2b5', light: '#54cbdd' },
-  white: { dark: '#D7D7D7', light: '#efefef', xlight: '#ffffff' },
+  white: { dark: '#D7D7D7', light: '#ebebeb', xlight: '#ffffff' },
 };
 
 const colors = {
