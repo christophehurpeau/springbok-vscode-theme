@@ -4,6 +4,13 @@ All notable changes to the "springbok-theme" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+### [0.6.2](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.6.1...v0.6.2) (2025-02-22)
+
+
+### Bug Fixes
+
+* white light is a bit too bright ([47a0e16](https://www.github.com/christophehurpeau/springbok-vscode-theme/commit/47a0e1688ae19ab7f28b43ea866641029c60809c))
+
 ### [0.6.1](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.6.0...v0.6.1) (2025-02-21)
 
 
