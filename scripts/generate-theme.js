@@ -1,4 +1,5 @@
 import fs from 'fs';
+import convert from 'color-convert';
 
 /**
  * SL (from HSL)
@@ -16,38 +17,63 @@ import fs from 'fs';
  * dark: 10%, 43% ? might keep 12
  * dark: 8%, 55% ? might keep 12
  */
+
+const createPaletteColor = (color, h) => {
+  const hsl = convert.hex.hsl(color);
+  if (hsl[0] !== h) throw new Error('Color h must be ' + hsl[0]);
+  if (hsl[1] !== 65) throw new Error('Color s must be 65%');
+  if (hsl[2] !== 43) throw new Error('Color l must be 43%');
+
+  return {
+    darkest: '#' + convert.hsl.hex([hsl[0], 85, 18]),
+    darker: '#' + convert.hsl.hex([hsl[0], 85, 30]),
+    dark: color,
+    light: '#' + convert.hsl.hex([hsl[0], 61, 55]),
+    bright: '#' + convert.hsl.hex([hsl[0], 100, 46]),
+    xlight: '#' + convert.hsl.hex([hsl[0], 58, 71]),
+  };
+};
+
 const palette = {
+  // springbok h: 22°
   springbok: {
     darkest: '#552407',
     darker: '#8F3C0C',
     dark: '#B55A26',
     light: '#D37947',
   },
+
+  // h: 22%
   soil: {
-    darkest: '#332c28',
-    darker: '#564a43',
+    darkest: '#332c28', // 22°, 12%, 18%
+    darker: '#564a43', // 22°, 12%, 30%
   },
 
-  sky: {
-    darkest: '#063155',
-    darker: '#0b518e',
-    dark: '#2672b5',
-    light: '#4691d2', // '#4b9ce3',
-    xlight: '#8bb8e0',
-  },
-  purple: {
-    dark: '#6b26b5',
-    light: '#8a46d2',
-    xlight: '#bf95ed',
-  },
+  // ainsi
+  red: createPaletteColor('#b52a26', 2),
+  green: createPaletteColor('#26b52a', 122),
+  yellow: createPaletteColor('#b5a726', 54),
+  blue: createPaletteColor('#2653b5', 221),
+  magenta: createPaletteColor('#b526a2', 308),
+  cyan: createPaletteColor('#26a2b5', 188),
 
-  black: { dark: '#383838', light: '#797979' },
-  red: { darker: '#8e0f0b', dark: '#B52A26', light: '#E2504B' },
-  green: { dark: '#26b52a', light: '#4dd852' },
-  yellow: { dark: '#b5a226', light: '#dac84e' },
-  blue: { dark: '#2653b5', light: '#5c88e7' },
-  magenta: { dark: '#a51449', light: '#e5578b' },
-  cyan: { dark: '#26a2b5', light: '#54cbdd' },
+  // additional
+  sky: createPaletteColor('#2672b5', 208),
+  purple: createPaletteColor('#6b26b5', 269),
+  orange: createPaletteColor('#b57c26', 36),
+
+  black: {
+    darkest: '#080808', //3%
+    darker: '#1a1a1a', //10%
+    dark: '#383838', // 22%
+    light: '#797979', // 47%
+  },
+  dark: {
+    darkest: '#181818', //9%
+    darker: '#2f2f2f', //18%
+    dark: '#474747', // 28%
+    light: '#878787', // 53%
+  },
   dim: { dark: '#707070', light: '#9f9f9f', xlight: '#e0e0e0' },
   white: { dark: '#D7D7D7', light: '#ebebeb', xlight: '#ffffff' },
 };
@@ -55,7 +81,21 @@ const palette = {
 const colors = {
   focus: palette.springbok.dark,
   error: palette.red.dark,
+  warning: palette.yellow.dark,
   inactiveForeground: palette.dim.light,
+
+  panels: {
+    background: palette.dark.darkest,
+    foreground: palette.dim.xlight,
+    focusForeground: palette.white.light,
+    border: palette.dark.darker,
+  },
+
+  editor: {
+    background: palette.black.darkest,
+    foreground: palette.dim.xlight,
+    border: palette.dark.darker,
+  },
 
   links: {
     default: palette.springbok.dark,
@@ -68,6 +108,9 @@ const colors = {
   },
   keywords: {
     default: palette.springbok.light,
+  },
+  language: {
+    constants: palette.red.light,
   },
   types: {
     default: palette.sky.xlight,
@@ -82,12 +125,41 @@ const colors = {
     name: palette.purple.xlight,
     call: palette.purple.xlight,
     defaultLibrary: palette.red.light,
+    preprocessor: palette.magenta.bright,
   },
   variables: {
     language: palette.springbok.light,
+    defaultLibrary: palette.red.light,
   },
   comments: {
     default: palette.dim.dark,
+    doc: '#6A8759',
+    jsdocParameterName: '#629755',
+  },
+
+  values: {
+    number: palette.yellow.bright,
+    string: palette.orange.bright,
+    escape: '#ff6a14',
+    stringInterpolation: '#ff6a14',
+    regexp: '#C365CA',
+    regexpEscape: '#e5bde8',
+    regexpGroup: '#f0daf2',
+  },
+  propertyName: '#B57E26',
+  attributeName: palette.yellow.light,
+  tag: palette.yellow.dark,
+  markdown: {
+    heading: '#D37947',
+    quote: palette.magenta.dark,
+    listPunctuation: '#B57E26',
+  },
+  css: {
+    property: palette.yellow.dark,
+  },
+  dotenv: {
+    property: '#B57E26',
+    value: '#FFA014',
   },
 };
 
@@ -122,8 +194,8 @@ const theme = {
     'inputValidation.infoBorder': palette.blue.dark,
     'inputValidation.infoBackground': palette.blue.dark,
     'inputValidation.infoForeground': palette.white.light,
-    'inputValidation.warningBorder': '#9b8613',
-    'inputValidation.warningBackground': '#9b8613',
+    'inputValidation.warningBorder': colors.warning,
+    'inputValidation.warningBackground': colors.warning,
     'inputValidation.warningForeground': palette.white.light,
     'badge.background': palette.springbok.dark,
     'badge.foreground': palette.white.light,
@@ -157,14 +229,14 @@ const theme = {
     'activityBarBadge.background': palette.springbok.dark,
     'activityBarBadge.foreground': palette.white.light,
     'activityErrorBadge.foreground': palette.white.light,
-    'activityErrorBadge.background': '#B52A26',
+    'activityErrorBadge.background': palette.red.dark,
     'activityWarningBadge.foreground': palette.white.light,
-    'activityWarningBadge.background': '#9b8613',
+    'activityWarningBadge.background': colors.warning,
     'titleBar.activeBackground': '#181818',
     'titleBar.activeForeground': palette.dim.xlight,
     'titleBar.inactiveBackground': '#2f2f2f',
     'titleBar.inactiveForeground': colors.inactiveForeground,
-    'titleBar.border': '#2f2f2f',
+    'titleBar.border': colors.panels.border,
     'menu.background': '#181818',
     'menu.foreground': palette.dim.xlight,
     'menu.selectionBackground': '#552407',
@@ -172,38 +244,38 @@ const theme = {
     'menu.separatorBackground': '#2f2f2f',
     'commandCenter.foreground': palette.white.light,
     'commandCenter.background': '#2f2f2f',
-    'commandCenter.border': '#2f2f2f',
+    'commandCenter.border': colors.panels.border,
     'commandCenter.inactiveForeground': colors.inactiveForeground,
-    'commandCenter.inactiveBorder': '#2f2f2f',
+    'commandCenter.inactiveBorder': colors.panels.border,
     'commandCenter.debuggingBackground': '#8F100C90',
     'sideBar.background': '#181818',
     'sideBar.foreground': palette.white.light,
-    'sideBar.border': '#2f2f2f',
-    'sideBarTitle.background': '#181818',
-    'sideBarSectionHeader.background': '#181818',
-    'sideBarSectionHeader.foreground': palette.dim.xlight,
-    'sideBarTitle.foreground': '#999999',
-    'panel.background': '#181818',
-    'panel.border': '#2f2f2f',
+    'sideBar.border': colors.panels.border,
+    'sideBarTitle.background': colors.panels.background,
+    'sideBarSectionHeader.background': colors.panels.background,
+    'sideBarSectionHeader.foreground': colors.panels.foreground,
+    'sideBarTitle.foreground': palette.dark.light,
+    'panel.background': colors.panels.background,
+    'panel.border': colors.panels.border,
     'panelTitle.activeBorder': palette.springbok.dark,
     'panelTitle.activeForeground': palette.white.light,
     'panelTitle.inactiveForeground': colors.inactiveForeground,
-    'panelSection.border': '#2f2f2f',
+    'panelSection.border': colors.panels.border,
     'keybindingLabel.background': '#51515180',
     'keybindingLabel.foreground': palette.dim.xlight,
     'keybindingLabel.border': '#81818180',
     'keybindingLabel.bottomBorder': '#41414190',
-    'sideBySideEditor.horizontalBorder': '#2f2f2f',
-    'sideBySideEditor.verticalBorder': '#2f2f2f',
-    'breadcrumb.background': '#181818',
-    'breadcrumb.foreground': palette.dim.xlight,
-    'breadcrumb.focusForeground': palette.white.light,
-    'breadcrumb.activeSelectionForeground': palette.white.light,
-    'breadcrumbPicker.background': '#181818',
-    'editorGroup.border': '#2f2f2f',
-    'outputView.background': '#080808',
-    'editor.background': '#080808',
-    'editor.foreground': palette.dim.xlight,
+    'sideBySideEditor.horizontalBorder': colors.panels.border,
+    'sideBySideEditor.verticalBorder': colors.panels.border,
+    'breadcrumb.background': colors.panels.background,
+    'breadcrumb.foreground': colors.panels.foreground,
+    'breadcrumb.focusForeground': colors.panels.focusForeground,
+    'breadcrumb.activeSelectionForeground': colors.panels.focusForeground,
+    'breadcrumbPicker.background': colors.panels.background,
+    'editorGroup.border': colors.editor.border,
+    'outputView.background': colors.editor.background,
+    'editor.background': colors.editor.background,
+    'editor.foreground': colors.editor.foreground,
     'editor.selectionBackground': '#f5a37331',
     'editor.inactiveSelectionBackground': '#363431',
     'editor.wordHighlightBackground': '#333837',
@@ -218,10 +290,10 @@ const theme = {
     'editor.symbolHighlightBackground': '#212423',
 
     'editorGutter.background': '#1a1a1a',
-    'editorGutter.modifiedBackground': '#dac84e',
-    'editorGutter.addedBackground': '#4dd852',
-    'editorGutter.deletedBackground': '#E2504B',
-    'editorGutter.commentRangeForeground':palette.dim.dark,
+    'editorGutter.modifiedBackground': palette.yellow.light,
+    'editorGutter.addedBackground': palette.green.light,
+    'editorGutter.deletedBackground': palette.red.light,
+    'editorGutter.commentRangeForeground': palette.dim.dark,
 
     'editorInlayHint.background': '#1a1a1a', // palette.sky.darkest, // '#2f2f2f',
     'editorInlayHint.foreground': palette.sky.dark, // palette.dim.light,
@@ -229,8 +301,8 @@ const theme = {
     'editorWhitespace.foreground': '#414141',
     'editorBracketMatch.border': '#eee',
     'editorIndentGuide.activeBackground': '#B0BEC5A4',
-    'diffEditor.insertedTextBackground': '#4dd85220',
-    'diffEditor.removedTextBackground': '#E2504B20',
+    'diffEditor.insertedTextBackground': palette.green.light + '20',
+    'diffEditor.removedTextBackground': palette.red.light + '20',
 
     'peekView.border': palette.springbok.darker,
     'peekViewTitle.background': '#531412',
@@ -242,12 +314,12 @@ const theme = {
     'peekViewResult.matchHighlightBackground': '#1e332d',
     'peekViewResult.selectionBackground': palette.springbok.darker,
 
-    'merge.currentHeaderBackground': '#26a2b590',
-    'merge.currentContentBackground': '#26a2b560',
-    'merge.incomingHeaderBackground': '#2653b590',
-    'merge.incomingContentBackground': '#2653b560',
-    'merge.commonHeaderBackground': '#b5a22690',
-    'merge.commonContentBackground': '#b5a22660',
+    'merge.currentHeaderBackground': palette.cyan.dark + '90',
+    'merge.currentContentBackground': palette.cyan.dark + '60',
+    'merge.incomingHeaderBackground': palette.blue.dark + '90',
+    'merge.incomingContentBackground': palette.blue.dark + '60',
+    'merge.commonHeaderBackground': palette.yellow.dark + '90',
+    'merge.commonContentBackground': palette.yellow.dark + '60',
 
     'statusBar.background': '#1a1a1a',
     'statusBar.foreground': palette.dim.xlight,
@@ -255,9 +327,9 @@ const theme = {
     'statusBar.noFolderBackground': '#717171',
     'statusBar.debuggingBackground': '#8F100C',
     'statusBarItem.remoteBackground': palette.springbok.darker,
-    'statusBarItem.remoteForeground': '#dac84e',
+    'statusBarItem.remoteForeground': palette.yellow.light,
 
-    'settings.modifiedItemIndicator': '#dac84e',
+    'settings.modifiedItemIndicator': palette.yellow.light,
 
     'terminal.background': '#000000',
     'terminal.foreground': '#F5F5F5',
@@ -313,7 +385,7 @@ const theme = {
     },
     /* -- Variables -- */
     'variable.defaultLibrary': {
-      foreground: palette.red.light,
+      foreground: colors.variables.defaultLibrary,
     },
     // "variable.local": {
     //   "foreground": "#be5555"
@@ -329,8 +401,6 @@ const theme = {
     },
   },
   tokenColors: [
-    // OK
-
     /* -- Values -- */
 
     /* Boolean */
@@ -338,7 +408,7 @@ const theme = {
     // {
     //   "scope": ["constant.language.boolean"],
     //   "settings": {
-    //     "foreground": "#26b52a"
+    //     "foreground": palette.green.dark
     //   }
     // },
 
@@ -350,7 +420,7 @@ const theme = {
         'constant.other.timestamp',
       ],
       settings: {
-        foreground: '#ecd400',
+        foreground: colors.values.number,
       },
     },
 
@@ -358,21 +428,21 @@ const theme = {
     {
       scope: 'string',
       settings: {
-        foreground: '#ffa014',
+        foreground: colors.values.string,
       },
     },
     {
       name: 'Escape',
       scope: 'constant.character.escape',
       settings: {
-        foreground: '#ff6a14',
+        foreground: colors.values.escape,
       },
     },
     {
       name: 'String interpolation',
       scope: ['punctuation.definition.template-expression'],
       settings: {
-        foreground: '#ff6a14',
+        foreground: colors.values.stringInterpolation,
       },
     },
     {
@@ -386,14 +456,14 @@ const theme = {
     {
       scope: 'string.regexp',
       settings: {
-        foreground: '#C365CA',
+        foreground: colors.values.regexp,
       },
     },
     {
       name: 'Regex Character Class + Escape',
       scope: 'constant.character.escape.backslash.regexp',
       settings: {
-        foreground: '#e5bde8',
+        foreground: colors.values.regexpEscape,
       },
     },
     {
@@ -403,7 +473,7 @@ const theme = {
         'punctuation.definition.character-class.regexp',
       ],
       settings: {
-        foreground: '#f0daf2',
+        foreground: colors.values.regexpGroup,
       },
     },
 
@@ -411,7 +481,7 @@ const theme = {
     {
       scope: ['constant.language'],
       settings: {
-        foreground: palette.red.light,
+        foreground: colors.language.constants,
       },
     },
 
@@ -435,7 +505,7 @@ const theme = {
       name: 'Comment Documentation',
       scope: ['comment.block.documentation'],
       settings: {
-        foreground: '#6A8759',
+        foreground: colors.comments.doc,
       },
     },
     {
@@ -445,7 +515,7 @@ const theme = {
         'punctuation.definition.block.tag.jsdoc',
       ],
       settings: {
-        foreground: '#6A8759',
+        foreground: colors.comments.doc,
         fontStyle: 'bold underline',
       },
     },
@@ -453,7 +523,7 @@ const theme = {
       name: 'JsDoc Parameter name',
       scope: 'variable.other.jsdoc',
       settings: {
-        foreground: '#629755',
+        foreground: colors.comments.jsdocParameterName,
         fontStyle: 'italic',
       },
     },
@@ -494,7 +564,7 @@ const theme = {
       name: 'Attributes',
       scope: ['entity.other.attribute-name'],
       settings: {
-        foreground: '#dac84e',
+        foreground: colors.attributeName,
       },
     },
 
@@ -502,14 +572,14 @@ const theme = {
       name: 'Keys',
       scope: ['meta.object-literal.key'],
       settings: {
-        foreground: '#B57E26',
+        foreground: colors.propertyName,
       },
     },
 
     {
       scope: ['entity.name.function.preprocessor'],
       settings: {
-        foreground: '#a51449',
+        foreground: colors.functions.preprocessor,
         fontStyle: 'bold',
       },
     },
@@ -645,7 +715,7 @@ const theme = {
     {
       scope: ['punctuation.definition.tag', 'entity.name.tag'],
       settings: {
-        foreground: '#b5a226',
+        foreground: colors.tag,
       },
     },
     {
@@ -667,7 +737,7 @@ const theme = {
         'meta.tag.attributes meta.jsx.children punctuation.section.embedded',
       ],
       settings: {
-        foreground: '#ff6a14',
+        foreground: colors.values.stringInterpolation,
       },
     },
 
@@ -675,7 +745,7 @@ const theme = {
     {
       scope: ['support.type.property-name'],
       settings: {
-        foreground: '#B57E26',
+        foreground: colors.propertyName,
       },
     },
 
@@ -683,13 +753,13 @@ const theme = {
     {
       scope: ['variable.other.env'],
       settings: {
-        foreground: '#B57E26',
+        foreground: colors.dotenv.property,
       },
     },
     {
       scope: ['source.env'],
       settings: {
-        foreground: '#FFA014',
+        foreground: colors.dotenv.value,
       },
     },
 
@@ -697,7 +767,7 @@ const theme = {
     {
       scope: ['markup.heading'],
       settings: {
-        foreground: '#D37947',
+        foreground: colors.markdown.heading,
         fontStyle: 'bold',
       },
     },
@@ -728,13 +798,13 @@ const theme = {
     {
       scope: ['markup.quote'],
       settings: {
-        foreground: '#a51449',
+        foreground: colors.markdown.quote,
       },
     },
     {
       scope: ['markup.list punctuation.definition.list.begin'],
       settings: {
-        foreground: '#B57E26',
+        foreground: colors.markdown.listPunctuation,
         fontStyle: 'bold',
       },
     },
@@ -749,7 +819,7 @@ const theme = {
     {
       scope: ['source.css entity.name.tag'],
       settings: {
-        foreground: '#b5a226',
+        foreground: colors.css.property,
         fontStyle: 'bold',
       },
     },
