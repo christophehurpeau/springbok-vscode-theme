@@ -29,6 +29,8 @@ const palette = {
   },
 
   sky: {
+    darkest: '#063155',
+    darker: '#0b518e',
     dark: '#2672b5',
     light: '#4691d2', // '#4b9ce3',
     xlight: '#8bb8e0',
@@ -210,7 +212,7 @@ const theme = {
     'editor.findMatchBackground': '#1d5042',
     'editor.findMatchHighlightBackground': '#1e332d',
 
-    'editor.lineHighlightBackground': '#181818',
+    'editor.lineHighlightBackground': '#1d1d1d',
     'editor.selectionHighlightBackground': '#333837',
     'editor.rangeHighlightBackground': '#212423',
     'editor.symbolHighlightBackground': '#212423',
@@ -221,8 +223,8 @@ const theme = {
     'editorGutter.deletedBackground': '#E2504B',
     'editorGutter.commentRangeForeground':palette.dim.dark,
 
-    'editorInlayHint.background': '#444',
-    'editorInlayHint.foreground': palette.dim.xlight,
+    'editorInlayHint.background': '#1a1a1a', // palette.sky.darkest, // '#2f2f2f',
+    'editorInlayHint.foreground': palette.sky.dark, // palette.dim.light,
 
     'editorWhitespace.foreground': '#414141',
     'editorBracketMatch.border': '#eee',
