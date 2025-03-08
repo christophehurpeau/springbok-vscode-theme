@@ -78,6 +78,12 @@ const palette = {
   white: { dark: '#D7D7D7', light: '#ebebeb', xlight: '#ffffff' },
 };
 
+const language1Color = palette.red;
+const language2Color = palette.magenta;
+
+const type1Color = palette.sky;
+// const type2Color = palette.blue;
+
 const colors = {
   focus: palette.springbok.dark,
   error: palette.red.dark,
@@ -110,26 +116,26 @@ const colors = {
     default: palette.springbok.light,
   },
   language: {
-    constants: palette.red.light,
+    constants: language1Color.light,
   },
   types: {
-    default: palette.sky.xlight,
-    primitives: palette.sky.xlight,
-    property: palette.sky.light,
+    default: type1Color.xlight,
+    primitives: type1Color.xlight,
+    property: type1Color.light,
   },
   classes: {
     name: palette.white.xlight,
-    defaultLibrary: palette.red.light,
+    defaultLibrary: language1Color.light,
   },
   functions: {
     name: palette.purple.xlight,
     call: palette.purple.xlight,
-    defaultLibrary: palette.red.light,
-    preprocessor: palette.magenta.bright,
+    defaultLibrary: language1Color.light,
+    preprocessor: language2Color.bright,
   },
   variables: {
     language: palette.springbok.light,
-    defaultLibrary: palette.red.light,
+    defaultLibrary: language1Color.light,
   },
   comments: {
     default: palette.dim.dark,
@@ -283,6 +289,7 @@ const theme = {
     'editor.hoverHighlightBackground': '#746b5f96',
     'editor.findMatchBackground': '#1d5042',
     'editor.findMatchHighlightBackground': '#1e332d',
+    'editorUnnecessaryCode.opacity': '#000000c0',
 
     'editor.lineHighlightBackground': '#1d1d1d',
     'editor.selectionHighlightBackground': '#333837',
@@ -295,8 +302,8 @@ const theme = {
     'editorGutter.deletedBackground': palette.red.light,
     'editorGutter.commentRangeForeground': palette.dim.dark,
 
-    'editorInlayHint.background': '#1a1a1a', // palette.sky.darkest, // '#2f2f2f',
-    'editorInlayHint.foreground': palette.sky.dark, // palette.dim.light,
+    'editorInlayHint.background': palette.black.dark + '00', // 00 means 0% opacity (transparent)
+    'editorInlayHint.foreground': type1Color.xlight + 'a0', // palette.dim.light,
 
     'editorWhitespace.foreground': '#414141',
     'editorBracketMatch.border': '#eee',
