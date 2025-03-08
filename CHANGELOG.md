@@ -4,6 +4,13 @@ All notable changes to the "springbok-theme" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.8.0](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.7.0...v0.8.0) (2025-03-08)
+
+
+### Features
+
+* improve inlayhint ([1281561](https://www.github.com/christophehurpeau/springbok-vscode-theme/commit/12815616bbca12d6ef2d33e7e1426c1babe61377))
+
 ## [0.7.0](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.6.2...v0.7.0) (2025-03-04)
 
 
