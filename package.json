@@ -26,16 +26,17 @@
       {
         "label": "Springbok Theme",
         "uiTheme": "vs-dark",
-        "path": "./themes/SpringbokTheme-legacy-theme.json"
+        "path": "./themes/Springbok-legacy-theme.json"
       },
       {
         "label": "Dark Springbok",
         "uiTheme": "vs-dark",
-        "path": "./themes/SpringbokTheme-light-theme.json"
+        "path": "./themes/Springbok-dark-theme.json"
       },
       {
         "label": "Light Springbok",
-        "path": "./themes/SpringbokTheme-light-theme.json"
+        "uiTheme": "vs",
+        "path": "./themes/Springbok-light-theme.json"
       }
     ]
   },
