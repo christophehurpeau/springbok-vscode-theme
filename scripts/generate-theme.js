@@ -28,9 +28,10 @@ const createPaletteColor = (color, h) => {
     darkest: '#' + convert.hsl.hex([hsl[0], 85, 18]),
     darker: '#' + convert.hsl.hex([hsl[0], 85, 30]),
     dark: color,
-    light: '#' + convert.hsl.hex([hsl[0], 61, 55]),
+    // medium: '#' + convert.hsl.hex([hsl[0], 65, 49]),
+    light: '#' + convert.hsl.hex([hsl[0], 61, 56]),
     bright: '#' + convert.hsl.hex([hsl[0], 100, 45]),
-    xlight: '#' + convert.hsl.hex([hsl[0], 58, 71]),
+    xlight: '#' + convert.hsl.hex([hsl[0], 61, 71]),
   };
 };
 
@@ -52,11 +53,11 @@ const palette = {
     xlight: '#F6E7DE',
   },
 
-  // ainsi
+  // ansi
   red: createPaletteColor('#b52a26', 2),
   green: createPaletteColor('#26b52a', 122),
   yellow: createPaletteColor('#b5a726', 54),
-  blue: createPaletteColor('#2653b5', 221),
+  blue: createPaletteColor('#263eb5', 230),
   magenta: createPaletteColor('#b526a2', 308),
   cyan: createPaletteColor('#26a2b5', 188),
 
@@ -70,6 +71,7 @@ const palette = {
     darker: '#1a1a1a', //10%
     dark: '#383838', // 22%
     light: '#797979', // 47%
+    bright: '#a0a0a0', // 63%
   },
   dark: {
     darkest: '#181818', //9%
@@ -179,7 +181,7 @@ const createTheme = (name, type) => {
       call: type === 'dark' ? palette.purple.xlight : palette.purple.light,
       defaultLibrary:
         type === 'dark' ? language1Color.light : language1Color.darker,
-      preprocessor: language2Color.bright,
+      preprocessor: language2Color.light,
     },
     variables: {
       language:
@@ -428,21 +430,21 @@ const createTheme = (name, type) => {
 
       'terminal.background': '#000000',
       'terminal.foreground': '#F5F5F5',
-      'terminal.ansiBlack': palette.black.dark,
-      'terminal.ansiRed': palette.red.dark,
-      'terminal.ansiGreen': palette.green.dark,
-      'terminal.ansiYellow': palette.yellow.dark,
-      'terminal.ansiBlue': palette.blue.dark,
-      'terminal.ansiMagenta': palette.magenta.dark,
-      'terminal.ansiCyan': palette.cyan.dark,
+      'terminal.ansiBlack': palette.black.light,
+      'terminal.ansiRed': palette.red.light,
+      'terminal.ansiGreen': palette.green.light,
+      'terminal.ansiYellow': palette.yellow.light,
+      'terminal.ansiBlue': palette.blue.light,
+      'terminal.ansiMagenta': palette.magenta.light,
+      'terminal.ansiCyan': palette.cyan.light,
       'terminal.ansiWhite': palette.white.dark,
-      'terminal.ansiBrightBlack': palette.black.light,
-      'terminal.ansiBrightRed': palette.red.light,
-      'terminal.ansiBrightGreen': palette.green.light,
-      'terminal.ansiBrightYellow': palette.yellow.light,
-      'terminal.ansiBrightBlue': palette.blue.light,
-      'terminal.ansiBrightMagenta': palette.magenta.light,
-      'terminal.ansiBrightCyan': palette.cyan.light,
+      'terminal.ansiBrightBlack': palette.black.bright,
+      'terminal.ansiBrightRed': palette.red.bright,
+      'terminal.ansiBrightGreen': palette.green.bright,
+      'terminal.ansiBrightYellow': palette.yellow.bright,
+      'terminal.ansiBrightBlue': palette.blue.bright,
+      'terminal.ansiBrightMagenta': palette.magenta.bright,
+      'terminal.ansiBrightCyan': palette.cyan.bright,
       'terminal.ansiBrightWhite': palette.white.xlight,
       'terminal.selectionBackground': '#F5A27326',
       'terminal.inactiveSelectionBackground': '#363431',

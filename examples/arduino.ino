@@ -12,7 +12,7 @@ class Resource {
     Resource(const char* resource_name) {
       name = resource_name;
     }
-    
+
   public:
     virtual void setup() {
     }
@@ -28,7 +28,7 @@ class SwitchResource: public Resource {
     SwitchResource(const char* switch_name, uint8_t switch_pin): Resource { switch_name } {
       pin = switch_pin;
     };
-    
+
     void setup() {
       #ifdef DEBUG
         Serial.print(F("Setup "));
@@ -36,7 +36,7 @@ class SwitchResource: public Resource {
         Serial.print(F(": "));
         Serial.println(name);
       #endif
-      
+
       // initialize digital pin mosfet as an output
       pinMode(pin, OUTPUT);
       digitalWrite(pin, SWITCH_INITIAL_VALUE ? HIGH : LOW);
@@ -49,7 +49,7 @@ void setup() {
     initSerial();
   #endif
   initEthernet();
-  
+
   /* init station */
   Resource *resources[STATION_RESOURCES_SIZE] = {
     new SwitchResource("relay1", RELAY_PIN_1),
