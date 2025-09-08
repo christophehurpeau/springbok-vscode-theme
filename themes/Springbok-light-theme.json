@@ -183,8 +183,8 @@
     "terminal.ansiBrightMagenta": "#E600C7",
     "terminal.ansiBrightCyan": "#00C7E6",
     "terminal.ansiBrightWhite": "#ffffff",
-    "terminal.selectionBackground": "#F5A27326",
-    "terminal.inactiveSelectionBackground": "#363431"
+    "terminal.selectionBackground": "#D9CAC264",
+    "terminal.inactiveSelectionBackground": "#D9CAC232"
   },
   "semanticTokenColors": {
     "enumMember": {

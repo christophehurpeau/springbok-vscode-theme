@@ -127,9 +127,17 @@ const createTheme = (name, type) => {
       foreground: type === 'dark' ? palette.dim.xlight : palette.dim.dark,
       border: palette.dark.darker,
       lineHighlightBackground: type === 'dark' ? '#1d1d1d' : '#f0f0f0',
-      selection: type === 'dark' ? palette.springbok.light : palette.soil.light,
       wordHighlight:
         type === 'dark' ? palette.springbok.light : palette.soil.xlight,
+    },
+
+    selection: {
+      background:
+        (type === 'dark' ? palette.springbok.light : palette.soil.light) + '64',
+      inactiveBackground:
+        (type === 'dark' ? palette.springbok.light : palette.soil.light) + '32',
+      hoverHighlightBackground:
+        (type === 'dark' ? palette.springbok.light : palette.soil.light) + '96',
     },
 
     tabs: {
@@ -350,12 +358,13 @@ const createTheme = (name, type) => {
       'outputView.background': colors.editor.background,
       'editor.background': colors.editor.background,
       'editor.foreground': colors.editor.foreground,
-      'editor.selectionBackground': colors.editor.selection + '64',
-      'editor.inactiveSelectionBackground': colors.editor.selection + '32',
+      'editor.selectionBackground': colors.selection.background,
+      'editor.inactiveSelectionBackground': colors.selection.inactiveBackground,
       'editor.wordHighlightBackground': colors.editor.wordHighlight + '16',
       'editor.wordHighlightStrongBackground':
         colors.editor.wordHighlight + '32',
-      'editor.hoverHighlightBackground': colors.editor.selection + '96',
+      'editor.hoverHighlightBackground':
+        colors.selection.hoverHighlightBackground,
       'editor.findMatchBackground': type === 'dark' ? '#1d5042' : '#1d504241',
       'editor.findMatchHighlightBackground':
         type === 'dark' ? '#1e332d' : '#1e332d41',
@@ -446,8 +455,9 @@ const createTheme = (name, type) => {
       'terminal.ansiBrightMagenta': palette.magenta.bright,
       'terminal.ansiBrightCyan': palette.cyan.bright,
       'terminal.ansiBrightWhite': palette.white.xlight,
-      'terminal.selectionBackground': '#F5A27326',
-      'terminal.inactiveSelectionBackground': '#363431',
+      'terminal.selectionBackground': colors.selection.background,
+      'terminal.inactiveSelectionBackground':
+        colors.selection.inactiveBackground,
     },
     semanticTokenColors: {
       /* -- Values -- */
