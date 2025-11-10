@@ -116,7 +116,7 @@ const createTheme = (name, type) => {
       foreground: type === 'dark' ? palette.dim.xlight : palette.dim.darkest,
       focusForeground:
         type === 'dark' ? palette.white.light : palette.black.dark,
-      border: type === 'dark' ? palette.dark.darker : palette.dim.light,
+      border: type === 'dark' ? palette.dark.darker : palette.soil.light,
       sideBarForeground:
         type === 'dark' ? palette.dark.light : palette.dim.dark,
     },
@@ -143,7 +143,9 @@ const createTheme = (name, type) => {
     tabs: {
       background: type === 'dark' ? palette.dark.darkest : palette.white.xlight,
       activeTabBackground:
-        type === 'dark' ? palette.dark.dark : palette.white.light,
+        type === 'dark' ? palette.soil.darker : palette.soil.light,
+      inactiveTabBackground:
+        type === 'dark' ? palette.dim.darkest : palette.dim.xlight,
     },
 
     editorGutter: {
@@ -381,7 +383,7 @@ const createTheme = (name, type) => {
       'editorGroupHeader.tabsBackground': colors.tabs.background,
       'tab.activeBackground': colors.tabs.activeTabBackground,
       'tab.activeForeground': colors.foreground,
-      'tab.inactiveBackground': colors.inactiveBackground,
+      'tab.inactiveBackground': colors.tabs.inactiveTabBackground,
       'tab.inactiveForeground': colors.inactiveForeground,
 
       'editorGutter.background': colors.editorGutter.background,
