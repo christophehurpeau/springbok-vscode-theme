@@ -4,6 +4,13 @@ All notable changes to the "springbok-theme" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+### [0.11.1](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.11.0...v0.11.1) (2025-11-10)
+
+
+### Bug Fixes
+
+* fix border color in light theme ([1865f47](https://www.github.com/christophehurpeau/springbok-vscode-theme/commit/1865f4748cdf841a627e79504cce2a04019f74d2))
+
 ## [0.11.0](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.10.0...v0.11.0) (2025-09-08)
 
 
