@@ -4,6 +4,13 @@ All notable changes to the "springbok-theme" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.12.0](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.11.1...v0.12.0) (2025-11-23)
+
+
+### Features
+
+* update theme ([6320352](https://www.github.com/christophehurpeau/springbok-vscode-theme/commit/6320352ede88e36c8f6740dbb093ac0416a92a86))
+
 ### [0.11.1](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.11.0...v0.11.1) (2025-11-10)
 
 
