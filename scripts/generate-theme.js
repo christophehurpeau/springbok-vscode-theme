@@ -1,114 +1,159 @@
 import fs from 'fs';
 import convert from 'color-convert';
 
-/**
- * SL (from HSL)
- *
- * Type 1:
- * darkest: 85%, 18%
- * darker: 85%, 30%
- * dark: 65%, 43%
- * light: 61%, 55%
- * xlight: 58%, 71%
- *
- * Type 2:
- * darkest: 12%, 18%
- * darker: 12%, 30%
- * dark: 10%, 43% ? might keep 12
- * dark: 8%, 55% ? might keep 12
- */
-
-const createPaletteColor = (color, h) => {
-  const hsl = convert.hex.hsl(color);
-  if (hsl[0] !== h) throw new Error('Color h must be ' + hsl[0]);
-  if (hsl[1] !== 65) throw new Error('Color s must be 65%');
-  if (hsl[2] !== 43) throw new Error('Color l must be 43%');
-
-  return {
-    darkest: '#' + convert.hsl.hex([hsl[0], 85, 18]),
-    darker: '#' + convert.hsl.hex([hsl[0], 85, 30]),
-    dark: color,
-    // medium: '#' + convert.hsl.hex([hsl[0], 65, 49]),
-    light: '#' + convert.hsl.hex([hsl[0], 61, 56]),
-    bright: '#' + convert.hsl.hex([hsl[0], 100, 45]),
-    xlight: '#' + convert.hsl.hex([hsl[0], 61, 71]),
-  };
-};
-
-const palette = {
-  // springbok h: 22°
-  springbok: {
-    darkest: '#552407',
-    darker: '#8F3C0C',
-    dark: '#B55A26',
-    light: '#D37947',
-  },
-
-  // h: 22%
-  soil: {
-    darkest: '#332c28', // 22°, 12%, 18%
-    darker: '#564a43', // 22°, 12%, 30%
-
-    light: '#D9CAC2',
-    xlight: '#F6E7DE',
-  },
-
-  // ansi
-  red: createPaletteColor('#b52a26', 2),
-  green: createPaletteColor('#26b52a', 122),
-  yellow: createPaletteColor('#b5a726', 54),
-  blue: createPaletteColor('#263eb5', 230),
-  magenta: createPaletteColor('#b526a2', 308),
-  cyan: createPaletteColor('#26a2b5', 188),
-
-  // additional
-  sky: createPaletteColor('#2672b5', 208),
-  purple: createPaletteColor('#6b26b5', 269),
-  orange: createPaletteColor('#b57c26', 36),
-
-  black: {
-    darkest: '#080808', //3%
-    darker: '#1a1a1a', //10%
-    dark: '#383838', // 22%
-    light: '#797979', // 47%
-    bright: '#a0a0a0', // 63%
-  },
-  dark: {
-    darkest: '#181818', //9%
-    darker: '#2f2f2f', //18%
-    dark: '#474747', // 28%
-    light: '#878787', // 53%
-  },
-  dim: {
-    darkest: '#2f2f2f', //18%
-    dark: '#707070', // 43%
-    light: '#9f9f9f',
-    xlight: '#e0e0e0',
-  },
-  white: { dark: '#D7D7D7', light: '#ebebeb', xlight: '#ffffff' },
-};
-
-const language1Color = palette.red;
-const language2Color = palette.magenta;
-
-const type1Color = palette.sky;
-// const type2Color = palette.blue;
-
 const createTheme = (name, type) => {
+  /**
+   * SL (from HSL)
+   *
+   * Type 1:
+   * darkest: 85%, 18%
+   * darker: 85%, 30%
+   * dark: 65%, 43%
+   * light: 61%, 55%
+   * xlight: 58%, 71%
+   *
+   * Type 2:
+   * darkest: 12%, 18%
+   * darker: 12%, 30%
+   * dark: 10%, 43% ? might keep 12
+   * dark: 8%, 55% ? might keep 12
+   */
+
+  const createPaletteColor = (color, h) => {
+    const hsl = convert.hex.hsl(color);
+    if (hsl[0] !== h) throw new Error('Color h must be ' + hsl[0]);
+    if (hsl[1] !== 65) throw new Error('Color s must be 65%');
+    if (hsl[2] !== 43) throw new Error('Color l must be 43%');
+
+    const hexHslWithTypeAdjustments = (s, l) => {
+      const additionalSaturationOffset = type === 'dark' ? 0 : -4;
+      const additionalLightnessOffset = type === 'dark' ? 0 : -(l / 12 + 4);
+
+      return (
+        '#' +
+        convert.hsl.hex([
+          h,
+          s + additionalSaturationOffset,
+          l + additionalLightnessOffset,
+        ])
+      );
+    };
+
+    return {
+      darkest: hexHslWithTypeAdjustments(85, 18),
+      darker: hexHslWithTypeAdjustments(85, 30),
+      dark: hexHslWithTypeAdjustments(65, 43),
+      // medium: hexHslWithTypeAdjustments( 65, 49),
+      light: hexHslWithTypeAdjustments(61, 56),
+      bright: hexHslWithTypeAdjustments(100, 45),
+      xlight: hexHslWithTypeAdjustments(61, 71),
+    };
+  };
+
+  const palette = {
+    // springbok h: 22°
+    springbok: {
+      darkest: '#552407',
+      darker: '#8F3C0C',
+      dark: '#B55A26',
+      light: '#D37947',
+      xlight: '#e0a88a',
+    },
+
+    // h: 22%
+    soil: {
+      darkest: '#332c28', // 22°, 12%, 18%
+      darker: '#564a43', // 22°, 12%, 30%
+      dark: '#7b6a60', // 22°, 12%, 43%
+
+      light: '#D9CAC2', // 21°, 23%, 81%
+      xlight: '#F6E7DE', // 23°, 57%, 92%
+    },
+
+    // ansi
+    red: createPaletteColor('#b52a26', 2),
+    green: createPaletteColor('#26b52a', 122),
+    yellow: createPaletteColor('#b5a726', 54),
+    blue: createPaletteColor('#263eb5', 230),
+    magenta: createPaletteColor('#b526a2', 308),
+    cyan: createPaletteColor('#26a2b5', 188),
+
+    // additional
+    sky: createPaletteColor('#2672b5', 208),
+    purple: createPaletteColor('#6b26b5', 269),
+    orange: createPaletteColor('#b57c26', 36),
+
+    black: {
+      darkest: '#080808', //3%
+      darker: '#1a1a1a', //10%
+      dark: '#383838', // 22%
+      light: '#797979', // 47%
+      bright: '#a0a0a0', // 63%
+    },
+    dark: {
+      darkest: '#181818', //9%
+      darker: '#2f2f2f', //18%
+      dark: '#474747', // 28%
+      light: '#878787', // 53%
+    },
+    dim: {
+      darkest: '#2f2f2f', //18%
+      dark: '#707070', // 43%
+      light: '#9f9f9f',
+      xlight: '#e0e0e0',
+    },
+    white: { dark: '#D7D7D7', light: '#ebebeb', xlight: '#fefefe' },
+  };
+
+  const language1Color = palette.red;
+  const language2Color = palette.magenta;
+
+  const type1Color = palette.sky;
+  // const type2Color = palette.blue;
+
   const foregroundPalette = type === 'dark' ? palette.white : palette.black;
 
-  const colors = {
+  const baseColors = {
     focus: palette.springbok.dark,
     error: palette.red.dark,
     warning: palette.yellow.dark,
     foreground: type === 'dark' ? palette.white.light : palette.black.dark,
+    activeForeground:
+      type === 'dark' ? palette.white.light : palette.black.darkest,
     inactiveBackground:
       type === 'dark' ? palette.dim.darkest : palette.dim.light,
     inactiveForeground: type === 'dark' ? palette.dim.light : palette.dim.dark,
+  };
+
+  const colors = {
+    ...baseColors,
 
     quickInput: {
       background: type === 'dark' ? palette.dark.darkest : palette.white.xlight,
       foreground: type === 'dark' ? palette.dim.xlight : palette.dim.darkest,
+    },
+
+    input: {
+      background: type === 'dark' ? palette.dark.darker : palette.white.xlight,
+      border: type === 'dark' ? palette.dark.darker : palette.soil.light,
+      foreground: type === 'dark' ? palette.dim.xlight : palette.dark.darkest,
+
+      option: {
+        activeBorder:
+          type === 'dark' ? palette.springbok.dark : palette.springbok.xlight,
+        activeBackground:
+          type === 'dark' ? palette.springbok.dark : palette.springbok.xlight,
+        activeForeground:
+          type === 'dark' ? palette.white.xlight : palette.black.darkest,
+        hoverBackground:
+          type === 'dark' ? palette.soil.dark : palette.soil.light,
+      },
+    },
+    toolbar: {
+      activeBackground:
+        type === 'dark' ? palette.springbok.dark : palette.springbok.xlight,
+      hoverBackground:
+        type === 'dark' ? palette.soil.darkest : palette.soil.xlight,
     },
 
     panels: {
@@ -116,7 +161,7 @@ const createTheme = (name, type) => {
       foreground: type === 'dark' ? palette.dim.xlight : palette.dim.darkest,
       focusForeground:
         type === 'dark' ? palette.white.light : palette.black.dark,
-      border: type === 'dark' ? palette.dark.darker : palette.soil.light,
+      border: type === 'dark' ? palette.dark.darker : palette.soil.xlight,
       sideBarForeground:
         type === 'dark' ? palette.dark.light : palette.dim.dark,
     },
@@ -129,6 +174,8 @@ const createTheme = (name, type) => {
       lineHighlightBackground: type === 'dark' ? '#1d1d1d' : '#f0f0f0',
       wordHighlight:
         type === 'dark' ? palette.springbok.light : palette.soil.xlight,
+      editorDecorationForeground:
+        type === 'dark' ? palette.soil.dark : palette.dim.light,
     },
 
     selection: {
@@ -143,9 +190,9 @@ const createTheme = (name, type) => {
     tabs: {
       background: type === 'dark' ? palette.dark.darkest : palette.white.xlight,
       activeTabBackground:
-        type === 'dark' ? palette.soil.darker : palette.soil.light,
+        type === 'dark' ? palette.soil.darker : palette.soil.xlight,
       inactiveTabBackground:
-        type === 'dark' ? palette.dim.darkest : palette.dim.xlight,
+        type === 'dark' ? palette.dim.darkest : palette.white.light,
     },
 
     editorGutter: {
@@ -153,7 +200,19 @@ const createTheme = (name, type) => {
     },
 
     commandCenter: {
-      background: type === 'dark' ? palette.dark.darker : palette.dim.light,
+      foreground: baseColors.foreground,
+      activeForeground: baseColors.activeForeground,
+      background: type === 'dark' ? palette.dark.darker : palette.soil.xlight,
+      activeBackground:
+        type === 'dark' ? palette.dark.darker : palette.springbok.xlight,
+      border: type === 'dark' ? palette.dark.darker : palette.soil.xlight,
+      activeBorder:
+        type === 'dark' ? palette.dark.light : palette.springbok.xlight,
+      inactiveForeground: baseColors.inactiveForeground,
+      inactiveBorder: baseColors.inactiveBackground,
+      inactiveBackground: baseColors.inactiveBackground,
+      debuggingBackground: '#8F100C90',
+      debuggingForeground: palette.white.light,
     },
 
     links: {
@@ -168,6 +227,14 @@ const createTheme = (name, type) => {
       background: palette.springbok.darker,
       hoverBackground: palette.springbok.dark,
       foreground: palette.white.light,
+    },
+    scrollbar: {
+      shadow: type === 'dark' ? '#00000033' : '#55555533',
+      slider: {
+        background: palette.soil.light + '33',
+        hoverBackground: palette.springbok.light + '83',
+        activeBackground: palette.springbok.light + '63',
+      },
     },
     keywords: {
       default:
@@ -240,9 +307,16 @@ const createTheme = (name, type) => {
       focusBorder: colors.focus,
       foreground: colors.foreground,
       errorForeground: colors.error,
-      'selection.background': '#d3784780',
+      'selection.background': colors.selection.background,
       'icon.foreground': colors.foreground,
-      'scrollbar.shadow': type === 'dark' ? '#00000033' : '#55555533',
+
+      // Scrollbar control
+      'scrollbar.shadow': colors.scrollbar.shadow,
+      'scrollbarSlider.background': colors.scrollbar.slider.background,
+      'scrollbarSlider.activeBackground':
+        colors.scrollbar.slider.activeBackground,
+      'scrollbarSlider.hoverBackground':
+        colors.scrollbar.slider.hoverBackground,
 
       'quickInput.background': colors.quickInput.background,
       'quickInput.foreground': colors.quickInput.foreground,
@@ -258,13 +332,13 @@ const createTheme = (name, type) => {
 
       'progressBar.background': palette.springbok.dark,
 
-      'input.background': colors.panels.background,
-      'input.border': colors.panels.border,
-      'input.foreground': colors.panels.foreground,
-      'inputOption.activeBorder': palette.springbok.dark,
-      'inputOption.activeBackground': palette.springbok.dark,
-      'inputOption.activeForeground': palette.white.light,
-      'inputOption.hoverBackground': '#332c28',
+      'input.background': colors.input.background,
+      'input.border': colors.input.border,
+      'input.foreground': colors.input.foreground,
+      'inputOption.activeBorder': colors.input.option.activeBorder,
+      'inputOption.activeBackground': colors.input.option.activeBackground,
+      'inputOption.activeForeground': colors.input.option.activeForeground,
+      'inputOption.hoverBackground': colors.input.option.hoverBackground,
       'inputValidation.errorBorder': palette.red.dark,
       'inputValidation.errorBackground': palette.red.dark,
       'inputValidation.errorForeground': palette.white.light,
@@ -276,6 +350,9 @@ const createTheme = (name, type) => {
       'inputValidation.warningForeground': palette.white.light,
       'badge.background': palette.springbok.dark,
       'badge.foreground': palette.white.light,
+
+      'toolbar.hoverBackground': colors.input.option.hoverBackground,
+      'toolbar.activeBackground': colors.input.option.activeBackground,
 
       'list.activeSelectionForeground': colors.foreground,
       'list.activeSelectionBackground':
@@ -289,14 +366,19 @@ const createTheme = (name, type) => {
         type === 'dark' ? palette.soil.darkest : palette.soil.light,
       'list.inactiveFocusBackground':
         type === 'dark' ? palette.springbok.dark : palette.springbok.light,
-      'list.filterMatchBackground': palette.red.dark,
-      'list.highlightForeground': palette.red.dark,
+      'list.filterMatchBackground': palette.springbok.dark,
+      'list.highlightForeground': palette.springbok.dark,
 
-      'gitDecoration.addedResourceForeground': palette.green.light,
-      'gitDecoration.modifiedResourceForeground': palette.yellow.light,
-      'gitDecoration.deletedResourceForeground': palette.red.light,
-      'gitDecoration.untrackedResourceForeground': palette.green.dark,
-      'gitDecoration.conflictingResourceForeground': palette.red.dark,
+      'gitDecoration.addedResourceForeground':
+        type === 'dark' ? palette.green.light : palette.green.dark,
+      'gitDecoration.modifiedResourceForeground':
+        type === 'dark' ? palette.yellow.light : palette.yellow.dark,
+      'gitDecoration.deletedResourceForeground':
+        type === 'dark' ? palette.red.light : palette.red.dark,
+      'gitDecoration.untrackedResourceForeground':
+        type === 'dark' ? palette.green.dark : palette.green.darker,
+      'gitDecoration.conflictingResourceForeground':
+        type === 'dark' ? palette.red.dark : palette.red.darker,
       // gitDecoration.ignoredResourceForeground
       // gitDecoration.submoduleResourceForeground
       'activityBar.background': colors.panels.background,
@@ -325,13 +407,21 @@ const createTheme = (name, type) => {
       'menu.selectionBackground': '#552407',
       'menu.selectionForeground': colors.foreground,
       'menu.separatorBackground': '#2f2f2f',
-      'commandCenter.foreground': colors.foreground,
+      'commandCenter.foreground': colors.commandCenter.foreground,
+      'commandCenter.activeForeground': colors.commandCenter.activeForeground,
       'commandCenter.background': colors.commandCenter.background,
-      'commandCenter.border': colors.panels.border,
-      'commandCenter.inactiveForeground': colors.inactiveForeground,
-      'commandCenter.inactiveBorder': colors.panels.border,
-      'commandCenter.debuggingBackground': '#8F100C90',
-      'commandCenter.debuggingForeground': palette.white.light,
+      'commandCenter.activeBackground': colors.commandCenter.activeBackground,
+      'commandCenter.activeBorder': colors.commandCenter.activeBorder,
+      'commandCenter.border': colors.commandCenter.border,
+      'commandCenter.inactiveForeground':
+        colors.commandCenter.inactiveForeground,
+      'commandCenter.inactiveBorder': colors.commandCenter.inactiveBorder,
+      'commandCenter.inactiveBackground':
+        colors.commandCenter.inactiveBackground,
+      'commandCenter.debuggingBackground':
+        colors.commandCenter.debuggingBackground,
+      'commandCenter.debuggingForeground':
+        colors.commandCenter.debuggingForeground,
       'sideBar.background': colors.panels.background,
       'sideBar.foreground': colors.foreground,
       'sideBar.border': colors.panels.border,
@@ -345,7 +435,7 @@ const createTheme = (name, type) => {
       'panelTitle.activeForeground': colors.foreground,
       'panelTitle.inactiveForeground': colors.inactiveForeground,
       'panelSection.border': colors.panels.border,
-      'keybindingLabel.background': '#51515180',
+      'keybindingLabel.background': colors.selection.background,
       'keybindingLabel.foreground': palette.dim.xlight,
       'keybindingLabel.border': '#81818180',
       'keybindingLabel.bottomBorder': '#41414190',
@@ -371,6 +461,8 @@ const createTheme = (name, type) => {
       'editor.findMatchHighlightBackground':
         type === 'dark' ? '#1e332d' : '#1e332d41',
       'editorUnnecessaryCode.opacity': '#000000c0',
+      'git.blame.editorDecorationForeground':
+        colors.editor.editorDecorationForeground,
 
       'editor.lineHighlightBackground': colors.editor.lineHighlightBackground,
       'editor.selectionHighlightBackground':
@@ -389,6 +481,7 @@ const createTheme = (name, type) => {
       'editorGutter.background': colors.editorGutter.background,
       'editorGutter.modifiedBackground': palette.yellow.light,
       'editorGutter.addedBackground': palette.green.light,
+
       'editorGutter.deletedBackground': palette.red.light,
       'editorGutter.commentRangeForeground':
         type === 'dark' ? palette.dim.dark : palette.dim.light,
