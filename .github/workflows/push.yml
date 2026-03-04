@@ -43,6 +43,7 @@ jobs:
           package-name: release-please-action
 
       - name: Publish to Open VSX Registry
+        if: ${{ github.ref == 'refs/heads/main' && steps.release.outputs.release_created }}
         uses: HaaLeo/publish-vscode-extension@v2
         id: publishToOpenVSX
         with:
