@@ -3,3 +3,5 @@
 .gitignore
 vsc-extension-quickstart.md
 /examples
+# the readme links them from github, the vsix does not need the megabytes
+/previews

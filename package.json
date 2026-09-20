@@ -42,17 +42,21 @@
   },
   "scripts": {
     "generate": "node scripts/generate-theme.ts",
+    "screenshots": "node scripts/screenshots.ts",
+    "package": "yarn typecheck && yarn generate",
+    "package:vsce": "vsce package --no-dependencies",
     "lint:prettier": "prettier --check .",
     "typecheck": "tsc --noEmit",
     "publish-patch": "vsce publish patch",
     "publish-minor": "vsce publish minor"
   },
   "devDependencies": {
-    "color-convert": "2.0.1",
     "@types/color-convert": "2.0.4",
     "@types/node": "22.13.5",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
+    "color-convert": "2.0.1",
+    "playwright": "^1.63.0",
     "prettier": "3.5.1",
     "typescript": "5.9.3",
     "vsce": "2.10.0"
