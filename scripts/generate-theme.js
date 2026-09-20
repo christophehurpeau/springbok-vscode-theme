@@ -223,6 +223,22 @@ const createTheme = (name, type) => {
       editorActive:
         type === 'dark' ? palette.springbok.dark : palette.springbok.light,
     },
+    // inline `code` in workbench markdown (settings descriptions, chat,
+    // walkthroughs, comments) - kept off the link colors to stay distinguishable
+    preformat: {
+      background: type === 'dark' ? palette.dark.darker : palette.soil.xlight,
+      foreground:
+        type === 'dark' ? palette.springbok.light : palette.springbok.darkest,
+    },
+    blockQuote: {
+      // same raised surface as preformat
+      background: type === 'dark' ? palette.soil.darkest : palette.soil.xlight,
+      // 5px left bar, needs to read against that surface
+      border:
+        type === 'dark' ? palette.springbok.light : palette.springbok.darker,
+    },
+    // hairline rules, rendered at 33% opacity in chat markdown
+    separator: palette.soil.dark,
     buttons: {
       background: palette.springbok.darker,
       hoverBackground: palette.springbok.dark,
@@ -325,6 +341,11 @@ const createTheme = (name, type) => {
       'textLink.foreground': colors.links.default,
       'textLink.activeForeground': colors.links.active,
       'editorLink.activeForeground': colors.links.editorActive,
+      'textPreformat.foreground': colors.preformat.foreground,
+      'textPreformat.background': colors.preformat.background,
+      'textBlockQuote.background': colors.blockQuote.background,
+      'textBlockQuote.border': colors.blockQuote.border,
+      'textSeparator.foreground': colors.separator,
       'button.background': colors.buttons.background,
       'button.hoverBackground': colors.buttons.hoverBackground,
       'button.foreground': colors.buttons.foreground,
