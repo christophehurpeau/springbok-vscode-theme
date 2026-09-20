@@ -41,6 +41,7 @@
     ]
   },
   "scripts": {
+    "generate": "node scripts/generate-theme.js",
     "lint:prettier": "prettier --check .",
     "publish-patch": "vsce publish patch",
     "publish-minor": "vsce publish minor"
