@@ -34,6 +34,9 @@ jobs:
       - name: Check prettier
         run: yarn run lint:prettier
 
+      - name: Typecheck
+        run: yarn run typecheck
+
       - uses: GoogleCloudPlatform/release-please-action@v2
         if: ${{ github.ref == 'refs/heads/main' }}
         id: release

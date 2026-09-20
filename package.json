@@ -41,17 +41,20 @@
     ]
   },
   "scripts": {
-    "generate": "node scripts/generate-theme.js",
+    "generate": "node scripts/generate-theme.ts",
     "lint:prettier": "prettier --check .",
+    "typecheck": "tsc --noEmit",
     "publish-patch": "vsce publish patch",
     "publish-minor": "vsce publish minor"
   },
   "devDependencies": {
     "color-convert": "2.0.1",
     "@types/color-convert": "2.0.4",
+    "@types/node": "22.13.5",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
     "prettier": "3.5.1",
+    "typescript": "5.9.3",
     "vsce": "2.10.0"
   },
   "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"

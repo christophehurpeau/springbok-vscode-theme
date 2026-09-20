@@ -1,15 +1,36 @@
+import type { Colors } from './colors.ts';
+
+/**
+ * `bold` / `italic` / `underline` merge with whatever the TextMate rule already
+ * set; `fontStyle` replaces it outright. Both spellings are used below, and
+ * they are not interchangeable.
+ */
+interface SemanticTokenStyle {
+  foreground?: string;
+  fontStyle?: string;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+}
+
+interface TokenColorRule {
+  name?: string;
+  scope: string | string[];
+  settings: {
+    foreground?: string;
+    fontStyle?: string;
+  };
+}
+
 /**
  * Syntax highlighting.
  *
  * `semanticTokenColors` wins over `tokenColors` where the language server
  * provides the token; `tokenColors` is the TextMate fallback.
- *
- * Note both spellings of the bold/italic styles below are deliberate and not
- * interchangeable: `bold: true` merges with whatever the TextMate rule already
- * set, `fontStyle` replaces it outright.
  */
-
-export const createSemanticTokenColors = (colors) => ({
+export const createSemanticTokenColors = (
+  colors: Colors,
+): Record<string, SemanticTokenStyle> => ({
   // -- Values --
   enumMember: {
     fontStyle: 'bold italic',
@@ -58,7 +79,7 @@ export const createSemanticTokenColors = (colors) => ({
 /**
  * Order is significant: the last rule that matches a scope wins.
  */
-export const createTokenColors = (colors) => [
+export const createTokenColors = (colors: Colors): TokenColorRule[] => [
   // -- Values --
   {
     scope: [

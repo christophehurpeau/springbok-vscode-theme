@@ -1,8 +1,10 @@
+import type { Palette, ThemeType } from './palette.ts';
+
 /**
  * The semantic layer: every palette value gets a role here, and the token maps
- * in `workbench.js` / `token-colors.js` only ever reference roles.
+ * in `workbench.ts` / `token-colors.ts` only ever reference roles.
  */
-export const createColors = (palette, type) => {
+export const createColors = (palette: Palette, type: ThemeType) => {
   const isDark = type === 'dark';
 
   const language1Color = palette.red;
@@ -229,9 +231,8 @@ export const createColors = (palette, type) => {
     },
     classes: {
       name: isDark ? palette.white.xlight : palette.black.darkest,
-      // `entity.name.type.class`, which sits a rung above `classes.name`.
-      // `palette.black` has no `xlight`, so in the light theme this is
-      // undefined and the rule keeps only its `fontStyle`.
+      // TextMate fallback for `entity.name.type.class`, where the semantic
+      // `class` token is unavailable
       declaration: isDark ? palette.white.xlight : palette.black.light,
     },
     functions: {
@@ -282,3 +283,5 @@ export const createColors = (palette, type) => {
     },
   };
 };
+
+export type Colors = ReturnType<typeof createColors>;

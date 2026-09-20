@@ -1,3 +1,12 @@
+import type { Colors } from './colors.ts';
+import type { Palette, ThemeType } from './palette.ts';
+
+interface CreateWorkbenchColorsOptions {
+  colors: Colors;
+  palette: Palette;
+  type: ThemeType;
+}
+
 /**
  * The workbench `colors` map. Grouped by area, in the order the eye meets them:
  * chrome first, then the editor, then the panels below it.
@@ -5,7 +14,11 @@
  * Values still read from `palette` directly where the token has no counterpart
  * in the semantic layer yet.
  */
-export const createWorkbenchColors = (colors, palette, type) => {
+export const createWorkbenchColors = ({
+  colors,
+  palette,
+  type,
+}: CreateWorkbenchColorsOptions): Record<string, string> => {
   const isDark = type === 'dark';
 
   return {

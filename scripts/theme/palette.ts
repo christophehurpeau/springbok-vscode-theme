@@ -20,7 +20,9 @@ import convert from 'color-convert';
  * `white`) reuse the rung names but not the ladder: they are tuned by eye and
  * each defines only the rungs it needs. Their L% is in a comment per value.
  */
-export const createPalette = (type) => {
+export type ThemeType = 'dark' | 'light';
+
+export const createPalette = (type: ThemeType) => {
   /**
    * Expands one mid-tone hex into the ladder above. The input must be exactly
    * `h`/65%/43% - the `dark` rung - so that the ladder is reproducible from it.
@@ -29,13 +31,13 @@ export const createPalette = (type) => {
    * saturation, and lightness reduced proportionally so the rungs stay legible
    * against a white background instead of a black one.
    */
-  const createPaletteColor = (color, h) => {
+  const createPaletteColor = (color: string, h: number) => {
     const hsl = convert.hex.hsl(color);
     if (hsl[0] !== h) throw new Error('Color h must be ' + hsl[0]);
     if (hsl[1] !== 65) throw new Error('Color s must be 65%');
     if (hsl[2] !== 43) throw new Error('Color l must be 43%');
 
-    const hexHslWithTypeAdjustments = (s, l) => {
+    const hexHslWithTypeAdjustments = (s: number, l: number) => {
       const additionalSaturationOffset = type === 'dark' ? 0 : -4;
       const additionalLightnessOffset = type === 'dark' ? 0 : -(l / 12 + 4);
 
@@ -121,3 +123,5 @@ export const createPalette = (type) => {
     },
   };
 };
+
+export type Palette = ReturnType<typeof createPalette>;
