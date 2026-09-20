@@ -125,6 +125,10 @@ const createTheme = (name, type) => {
     inactiveForeground: type === 'dark' ? palette.dim.light : palette.dim.dark,
   };
 
+  // surface behind inline `code` and fenced blocks in workbench markdown
+  const preformatBackground =
+    type === 'dark' ? palette.dark.darker : palette.soil.xlight;
+
   const colors = {
     ...baseColors,
 
@@ -176,6 +180,18 @@ const createTheme = (name, type) => {
         type === 'dark' ? palette.springbok.light : palette.soil.xlight,
       editorDecorationForeground:
         type === 'dark' ? palette.soil.dark : palette.dim.light,
+      cursor:
+        type === 'dark' ? palette.springbok.light : palette.springbok.dark,
+      // inline completions - warm dim, to read as distinct from the grey comments
+      ghostText: palette.soil.dark,
+      activeIndentGuide: palette.soil.dark,
+    },
+
+    // squiggles and their gutter/ruler marks
+    diagnostics: {
+      error: type === 'dark' ? palette.red.light : palette.red.dark,
+      warning: type === 'dark' ? palette.yellow.light : palette.yellow.dark,
+      info: type === 'dark' ? palette.sky.light : palette.sky.dark,
     },
 
     selection: {
@@ -226,12 +242,15 @@ const createTheme = (name, type) => {
     // inline `code` in workbench markdown (settings descriptions, chat,
     // walkthroughs, comments) - kept off the link colors to stay distinguishable
     preformat: {
-      background: type === 'dark' ? palette.dark.darker : palette.soil.xlight,
+      background: preformatBackground,
       foreground:
         type === 'dark' ? palette.springbok.light : palette.springbok.darkest,
     },
+    // fenced blocks, same surface as inline code
+    codeBlock: {
+      background: preformatBackground,
+    },
     blockQuote: {
-      // same raised surface as preformat
       background: type === 'dark' ? palette.soil.darkest : palette.soil.xlight,
       // 5px left bar, needs to read against that surface
       border:
@@ -343,6 +362,7 @@ const createTheme = (name, type) => {
       'editorLink.activeForeground': colors.links.editorActive,
       'textPreformat.foreground': colors.preformat.foreground,
       'textPreformat.background': colors.preformat.background,
+      'textCodeBlock.background': colors.codeBlock.background,
       'textBlockQuote.background': colors.blockQuote.background,
       'textBlockQuote.border': colors.blockQuote.border,
       'textSeparator.foreground': colors.separator,
@@ -356,6 +376,9 @@ const createTheme = (name, type) => {
       'input.background': colors.input.background,
       'input.border': colors.input.border,
       'input.foreground': colors.input.foreground,
+      // select boxes, kept in step with the inputs they sit next to
+      'dropdown.background': colors.input.background,
+      'dropdown.foreground': colors.input.foreground,
       'inputOption.activeBorder': colors.input.option.activeBorder,
       'inputOption.activeBackground': colors.input.option.activeBackground,
       'inputOption.activeForeground': colors.input.option.activeForeground,
@@ -516,9 +539,18 @@ const createTheme = (name, type) => {
       'editorInlayHint.foreground':
         (type === 'black' ? type1Color.xlight : type1Color.light) + 'a0', // palette.dim.light,
 
+      'editorCursor.foreground': colors.editor.cursor,
+      'editorGhostText.foreground': colors.editor.ghostText,
+
+      'editorError.foreground': colors.diagnostics.error,
+      'editorWarning.foreground': colors.diagnostics.warning,
+      'editorInfo.foreground': colors.diagnostics.info,
+
       'editorWhitespace.foreground': type === 'dark' ? '#414141' : '#dfdfdf',
       'editorBracketMatch.border': type === 'dark' ? '#eee' : '#444',
-      'editorIndentGuide.activeBackground': '#B0BEC5A4',
+      'editorIndentGuide.activeBackground1': colors.editor.activeIndentGuide,
+      // deprecated alias, kept for the VS Code versions in `engines`
+      'editorIndentGuide.activeBackground': colors.editor.activeIndentGuide,
       'diffEditor.insertedTextBackground': palette.green.light + '20',
       'diffEditor.removedTextBackground': palette.red.light + '20',
 
