@@ -1,3 +1,13 @@
+---
+title: "Sample Markdown Document"
+draft: false
+# frontmatter only counts on the first line of the file
+tags:
+  - markdown
+nested:
+  key: value
+---
+
 ## Text Formatting
 
 This is **bold text** and this is __also bold__.

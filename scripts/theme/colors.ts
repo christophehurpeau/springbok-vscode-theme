@@ -31,7 +31,7 @@ export const createColors = (palette: Palette, type: ThemeType) => {
     warning: palette.yellow.dark,
     foreground: isDark ? palette.white.light : palette.black.dark,
     activeForeground: isDark ? palette.white.light : palette.black.darkest,
-    inactiveBackground: isDark ? palette.dim.darkest : palette.dim.light,
+    inactiveBackground: isDark ? palette.dim.darkest : palette.dim.xlight,
     inactiveForeground: isDark ? palette.dim.light : palette.dim.dark,
   };
 
@@ -95,13 +95,72 @@ export const createColors = (palette: Palette, type: ThemeType) => {
 
     editorGutter: {
       background: isDark ? palette.black.darker : palette.white.light,
+      modifiedBackground: isDark
+        ? palette.yellow.light
+        : palette.yellow.darkerBright,
+      addedBackground: isDark
+        ? palette.green.light
+        : palette.green.darkerBright,
+      deletedBackground: isDark ? palette.red.light : palette.red.darkerBright,
+      commentRangeForeground: isDark ? palette.dim.dark : palette.dim.light,
+
+      lineNumberForeground: isDark ? palette.dim.dark : palette.dim.light,
+      activeLineNumberForeground: isDark
+        ? palette.white.light
+        : palette.dark.dark,
+    },
+
+    diffEditor: {
+      insertedTextBackground: isDark
+        ? palette.green.light + '20'
+        : palette.green.darkerBright + '20',
+      removedTextBackground: isDark
+        ? palette.red.light + '20'
+        : palette.red.darkerBright + '20',
+    },
+
+    peekView: {
+      border: isDark ? palette.springbok.darker : palette.springbok.light,
+      titleBackground: isDark ? '#531412' : palette.soil.light,
+      titleLabelForeground: isDark
+        ? palette.white.xlight
+        : palette.black.darkest,
+      // same as the editor, a step darker
+      editorBackground: isDark ? '#030303' : '#F3F3F3',
+      editorMatchHighlightBackground: isDark ? '#14221e' : palette.soil.light,
+      resultBackground: isDark ? '#0F0F0F' : palette.white.xlight,
+      resultMatchHighlightBackground: isDark ? '#1e332d' : '#1e332d31',
+      resultSelectionBackground: isDark
+        ? palette.springbok.darker
+        : palette.soil.xlight,
+    },
+
+    merge: {
+      currentHeaderBackground: isDark
+        ? palette.cyan.dark + '90'
+        : palette.cyan.xlight + '90',
+      currentContentBackground: isDark
+        ? palette.cyan.dark + '60'
+        : palette.cyan.xlight + '60',
+      incomingHeaderBackground: isDark
+        ? palette.blue.darker + '90'
+        : palette.blue.xlight + '90',
+      incomingContentBackground: isDark
+        ? palette.blue.darker + '60'
+        : palette.blue.xlight + '60',
+      commonHeaderBackground: isDark
+        ? palette.yellow.darker + '90'
+        : palette.yellow.xlight + '90',
+      commonContentBackground: isDark
+        ? palette.yellow.darker + '60'
+        : palette.yellow.xlight + '60',
     },
 
     // squiggles and their gutter/ruler marks
     diagnostics: {
-      error: isDark ? palette.red.light : palette.red.dark,
-      warning: isDark ? palette.yellow.light : palette.yellow.dark,
-      info: isDark ? palette.sky.light : palette.sky.dark,
+      error: isDark ? palette.red.light : palette.red.darkerBright,
+      warning: isDark ? palette.yellow.light : palette.yellow.darkerBright,
+      info: isDark ? palette.sky.light : palette.sky.darkerBright,
     },
 
     selection: {
@@ -167,6 +226,27 @@ export const createColors = (palette: Palette, type: ThemeType) => {
       debuggingForeground: palette.white.light,
     },
 
+    terminal: {
+      background: isDark ? palette.black.darkest : palette.white.xlight,
+      foreground: isDark ? palette.white.light : palette.black.dark,
+      black: isDark ? palette.black.light : palette.black.darkest,
+      brightBlack: isDark ? palette.black.bright : palette.black.light,
+      white: isDark ? palette.white.dark : palette.dim.dark,
+      brightWhite: isDark ? palette.white.xlight : palette.dim.darkest,
+      red: isDark ? palette.red.light : palette.red.darker,
+      brightRed: isDark ? palette.red.bright : palette.red.dark,
+      green: isDark ? palette.green.light : palette.green.darker,
+      brightGreen: isDark ? palette.green.bright : palette.green.dark,
+      yellow: isDark ? palette.yellow.light : palette.yellow.darker,
+      brightYellow: isDark ? palette.yellow.bright : palette.yellow.dark,
+      blue: isDark ? palette.blue.light : palette.blue.darker,
+      brightBlue: isDark ? palette.blue.bright : palette.blue.dark,
+      magenta: isDark ? palette.magenta.light : palette.magenta.darker,
+      brightMagenta: isDark ? palette.magenta.bright : palette.magenta.dark,
+      cyan: isDark ? palette.cyan.light : palette.cyan.darker,
+      brightCyan: isDark ? palette.cyan.bright : palette.cyan.dark,
+    },
+
     buttons: {
       background: palette.springbok.darker,
       hoverBackground: palette.springbok.dark,
@@ -222,12 +302,13 @@ export const createColors = (palette: Palette, type: ThemeType) => {
       default: isDark ? palette.springbok.light : palette.springbok.dark,
     },
     language: {
-      constants: language1Color.light,
+      constants: isDark ? language1Color.light : language1Color.dark,
     },
     types: {
-      default: isDark ? type1Color.xlight : type1Color.light,
-      primitives: isDark ? type1Color.xlight : type1Color.light,
-      property: isDark ? type1Color.light : type1Color.dark,
+      default: isDark ? type1Color.xlight : type1Color.darkestBright,
+      primitives: isDark ? type1Color.xlight : type1Color.darkestBright,
+      property: isDark ? type1Color.light : type1Color.darkest,
+      inlayHint: (isDark ? type1Color.light : type1Color.darkestBright) + 'a0',
     },
     classes: {
       name: isDark ? palette.white.xlight : palette.black.darkest,
@@ -236,9 +317,9 @@ export const createColors = (palette: Palette, type: ThemeType) => {
       declaration: isDark ? palette.white.xlight : palette.black.light,
     },
     functions: {
-      name: isDark ? palette.purple.xlight : palette.purple.light,
-      call: isDark ? palette.purple.xlight : palette.purple.light,
-      defaultLibrary: isDark ? language1Color.light : language1Color.darker,
+      name: isDark ? palette.purple.xlight : palette.purple.dark,
+      call: isDark ? palette.purple.xlight : palette.purple.dark,
+      defaultLibrary: isDark ? language1Color.light : language1Color.dark,
       preprocessor: language2Color.light,
     },
     variables: {
@@ -255,31 +336,37 @@ export const createColors = (palette: Palette, type: ThemeType) => {
       jsdocParameterName: '#629755',
     },
     values: {
-      number: palette.yellow.bright,
-      string: palette.orange.bright,
-      escape: '#ff6a14',
-      stringInterpolation: '#ff6a14',
-      regexp: '#C365CA',
-      regexpEscape: '#e5bde8',
-      regexpGroup: '#f0daf2',
+      number: isDark ? palette.yellow.bright : palette.red.darkerBright,
+      string: isDark ? palette.orange.bright : palette.orange.darkerBright,
+      escape: isDark
+        ? palette.springbok.bright
+        : palette.springbok.darkerBright,
+      stringInterpolation: isDark
+        ? palette.springbok.bright
+        : palette.springbok.darkerBright,
+      regexp: isDark ? '#C365CA' : palette.yellow.darkest,
+      regexpEscape: isDark ? '#e5bde8' : palette.red.dark,
+      regexpGroup: isDark ? '#f0daf2' : palette.yellow.darkestBright,
     },
     // syntax inside a template expression or a JSX attribute embed
     embeddedExpression: isDark ? '#eeeeff' : '#111100',
     colorLiteral: isDark ? '#ffffff' : '#000000',
-    propertyName: '#B57E26',
-    attributeName: isDark ? palette.yellow.light : palette.yellow.darker,
-    tag: palette.yellow.dark,
+    propertyName: isDark ? palette.orange.dark : palette.orange.darkestBright,
+    attributeName: isDark ? palette.yellow.light : palette.red.darker,
+    tag: isDark ? palette.yellow.dark : palette.red.darkestBright,
     markdown: {
-      heading: '#D37947',
-      quote: palette.magenta.dark,
-      listPunctuation: '#B57E26',
+      heading: isDark ? palette.springbok.light : palette.springbok.dark,
+      quote: isDark ? palette.magenta.dark : palette.magenta.darkestBright,
+      listPunctuation: isDark
+        ? palette.orange.dark
+        : palette.orange.darkestBright,
     },
     css: {
-      property: palette.yellow.dark,
+      property: isDark ? palette.yellow.dark : palette.red.darkestBright,
     },
     dotenv: {
-      property: '#B57E26',
-      value: '#FFA014',
+      property: isDark ? palette.orange.dark : palette.orange.darker,
+      value: isDark ? palette.orange.bright : palette.orange.darkerBright,
     },
   };
 };

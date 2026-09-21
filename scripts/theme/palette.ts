@@ -22,6 +22,8 @@ import convert from 'color-convert';
  */
 export type ThemeType = 'dark' | 'light';
 
+type PaletteColorKind = 'lighter' | 'normal' | 'darker';
+
 export const createPalette = (type: ThemeType) => {
   /**
    * Expands one mid-tone hex into the ladder above. The input must be exactly
@@ -31,15 +33,28 @@ export const createPalette = (type: ThemeType) => {
    * saturation, and lightness reduced proportionally so the rungs stay legible
    * against a white background instead of a black one.
    */
-  const createPaletteColor = (color: string, h: number) => {
+  const createPaletteColor = (
+    color: string,
+    h: number,
+    darkKind: PaletteColorKind = 'normal',
+    lightKind: PaletteColorKind = 'normal',
+  ) => {
     const hsl = convert.hex.hsl(color);
     if (hsl[0] !== h) throw new Error('Color h must be ' + hsl[0]);
     if (hsl[1] !== 65) throw new Error('Color s must be 65%');
     if (hsl[2] !== 43) throw new Error('Color l must be 43%');
 
+    const additionalLightnessByKindMap = {
+      lighter: 5,
+      normal: type === 'dark' ? 0 : 1,
+      darker: -10,
+    };
+
     const hexHslWithTypeAdjustments = (s: number, l: number) => {
-      const additionalSaturationOffset = type === 'dark' ? 0 : -4;
-      const additionalLightnessOffset = type === 'dark' ? 0 : -(l / 12 + 4);
+      const additionalSaturationOffset = type === 'dark' ? 0 : -2;
+      const additionalLightnessOffset =
+        (type === 'dark' ? 0 : Math.round(l / 4)) +
+        additionalLightnessByKindMap[type === 'dark' ? darkKind : lightKind];
 
       return (
         '#' +
@@ -53,7 +68,10 @@ export const createPalette = (type: ThemeType) => {
 
     return {
       darkest: hexHslWithTypeAdjustments(85, 18),
+      darkestBright: hexHslWithTypeAdjustments(100, 18),
       darker: hexHslWithTypeAdjustments(85, 30),
+      darkerBright: hexHslWithTypeAdjustments(100, 30),
+
       dark: hexHslWithTypeAdjustments(65, 43),
       light: hexHslWithTypeAdjustments(61, 56),
       bright: hexHslWithTypeAdjustments(100, 45),
@@ -64,11 +82,13 @@ export const createPalette = (type: ThemeType) => {
   return {
     // the brand hue, 22 degrees
     springbok: {
-      darkest: '#552407',
-      darker: '#8F3C0C',
-      dark: '#B55A26',
-      light: '#D37947',
-      xlight: '#e0a88a',
+      darkest: '#552407', // 22°, 85%, 18%
+      darker: '#8F3C0C', // 22°, 85%, 30%
+      darkerBright: '#993800', // 22°, 100%, 30%
+      dark: '#B55A26', // 22°, 65%, 43%
+      light: '#D37947', // 21°, 61%, 55%
+      bright: '#ff6a14', // 22°, 100%, 54%}
+      xlight: '#e0a88a', // 21°, 58%, 71%
     },
 
     // the brand hue desaturated: the warm greys every surface is built from
@@ -85,15 +105,16 @@ export const createPalette = (type: ThemeType) => {
 
     // ansi
     red: createPaletteColor('#b52a26', 2),
-    green: createPaletteColor('#26b52a', 122),
+    green: createPaletteColor('#26b52a', 122, 'darker', 'darker'),
     yellow: createPaletteColor('#b5a726', 54),
-    blue: createPaletteColor('#263eb5', 230),
+    blue: createPaletteColor('#263eb5', 230, 'lighter'),
     magenta: createPaletteColor('#b526a2', 308),
     cyan: createPaletteColor('#26a2b5', 188),
 
     // additional
     sky: createPaletteColor('#2672b5', 208),
     purple: createPaletteColor('#6b26b5', 269),
+    pink: createPaletteColor('#ab26b5', 296),
     orange: createPaletteColor('#b57c26', 36),
 
     // neutral greys, in three overlapping ranges

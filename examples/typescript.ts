@@ -70,7 +70,7 @@ function error(message: string): never {
 
 let sym1 = Symbol();
 
-let regexp = /some-(regexp)[a-z]+/;
+let regexp = /some-(regexp\[)[a-z]+/;
 
 const c = 'c';
 const d = 'd' as const;

@@ -244,22 +244,18 @@ export const createWorkbenchColors = ({
     // deprecated alias, kept for the VS Code versions in `engines`
     'editorIndentGuide.activeBackground': colors.editor.activeIndentGuide,
     'editorInlayHint.background': palette.black.dark + '00', // 00 means 0% opacity (transparent)
-    'editorInlayHint.foreground': palette.sky.light + 'a0',
+    'editorInlayHint.foreground': colors.types.inlayHint,
 
     // -- Editor gutter and decorations --
     'editorGutter.background': colors.editorGutter.background,
-    'editorGutter.modifiedBackground': palette.yellow.light,
-    'editorGutter.addedBackground': palette.green.light,
-    'editorGutter.deletedBackground': palette.red.light,
-    'editorGutter.commentRangeForeground': isDark
-      ? palette.dim.dark
-      : palette.dim.light,
-    'editorLineNumber.foreground': isDark
-      ? palette.dim.dark
-      : palette.dim.light,
-    'editorLineNumber.activeForeground': isDark
-      ? palette.white.light
-      : palette.dark.dark,
+    'editorGutter.modifiedBackground': colors.editorGutter.modifiedBackground,
+    'editorGutter.addedBackground': colors.editorGutter.addedBackground,
+    'editorGutter.deletedBackground': colors.editorGutter.deletedBackground,
+    'editorGutter.commentRangeForeground':
+      colors.editorGutter.commentRangeForeground,
+    'editorLineNumber.foreground': colors.editorGutter.lineNumberForeground,
+    'editorLineNumber.activeForeground':
+      colors.editorGutter.activeLineNumberForeground,
     'git.blame.editorDecorationForeground': colors.editor.blameForeground,
 
     // -- Diagnostics --
@@ -268,30 +264,30 @@ export const createWorkbenchColors = ({
     'editorInfo.foreground': colors.diagnostics.info,
 
     // -- Diff --
-    'diffEditor.insertedTextBackground': palette.green.light + '20',
-    'diffEditor.removedTextBackground': palette.red.light + '20',
+    'diffEditor.insertedTextBackground':
+      colors.diffEditor.insertedTextBackground,
+    'diffEditor.removedTextBackground': colors.diffEditor.removedTextBackground,
 
     // -- Peek view --
-    'peekView.border': palette.springbok.darker,
-    'peekViewTitle.background': '#531412',
-    // same as the editor, a step darker
-    'peekViewEditor.background': isDark ? '#030303' : '#F3F3F3',
-    'peekViewEditor.matchHighlightBackground': isDark
-      ? '#14221e'
-      : palette.soil.light,
-    'peekViewResult.background': isDark ? '#0F0F0F' : colors.surface.background,
-    'peekViewResult.matchHighlightBackground': isDark ? '#1e332d' : '#1e332d31',
-    'peekViewResult.selectionBackground': isDark
-      ? palette.springbok.darker
-      : palette.soil.light,
+    'peekView.border': colors.peekView.border,
+    'peekViewTitle.background': colors.peekView.titleBackground,
+    'peekViewTitleLabel.foreground': colors.peekView.titleLabelForeground,
+    'peekViewEditor.background': colors.peekView.editorBackground,
+    'peekViewEditor.matchHighlightBackground':
+      colors.peekView.editorMatchHighlightBackground,
+    'peekViewResult.background': colors.peekView.resultBackground,
+    'peekViewResult.matchHighlightBackground':
+      colors.peekView.resultMatchHighlightBackground,
+    'peekViewResult.selectionBackground':
+      colors.peekView.resultSelectionBackground,
 
     // -- Merge conflicts --
-    'merge.currentHeaderBackground': palette.cyan.dark + '90',
-    'merge.currentContentBackground': palette.cyan.dark + '60',
-    'merge.incomingHeaderBackground': palette.blue.dark + '90',
-    'merge.incomingContentBackground': palette.blue.dark + '60',
-    'merge.commonHeaderBackground': palette.yellow.dark + '90',
-    'merge.commonContentBackground': palette.yellow.dark + '60',
+    'merge.currentHeaderBackground': colors.merge.currentHeaderBackground,
+    'merge.currentContentBackground': colors.merge.currentContentBackground,
+    'merge.incomingHeaderBackground': colors.merge.incomingHeaderBackground,
+    'merge.incomingContentBackground': colors.merge.incomingContentBackground,
+    'merge.commonHeaderBackground': colors.merge.commonHeaderBackground,
+    'merge.commonContentBackground': colors.merge.commonContentBackground,
 
     // -- Status bar --
     'statusBar.background': colors.statusBar.background,
@@ -307,24 +303,24 @@ export const createWorkbenchColors = ({
     'settings.modifiedItemIndicator': palette.yellow.light,
 
     // -- Terminal --
-    'terminal.background': '#000000',
-    'terminal.foreground': '#F5F5F5',
-    'terminal.ansiBlack': palette.black.light,
-    'terminal.ansiRed': palette.red.light,
-    'terminal.ansiGreen': palette.green.light,
-    'terminal.ansiYellow': palette.yellow.light,
-    'terminal.ansiBlue': palette.blue.light,
-    'terminal.ansiMagenta': palette.magenta.light,
-    'terminal.ansiCyan': palette.cyan.light,
-    'terminal.ansiWhite': palette.white.dark,
-    'terminal.ansiBrightBlack': palette.black.bright,
-    'terminal.ansiBrightRed': palette.red.bright,
-    'terminal.ansiBrightGreen': palette.green.bright,
-    'terminal.ansiBrightYellow': palette.yellow.bright,
-    'terminal.ansiBrightBlue': palette.blue.bright,
-    'terminal.ansiBrightMagenta': palette.magenta.bright,
-    'terminal.ansiBrightCyan': palette.cyan.bright,
-    'terminal.ansiBrightWhite': palette.white.xlight,
+    'terminal.background': colors.terminal.background,
+    'terminal.foreground': colors.terminal.foreground,
+    'terminal.ansiBlack': colors.terminal.black,
+    'terminal.ansiRed': colors.terminal.red,
+    'terminal.ansiGreen': colors.terminal.green,
+    'terminal.ansiYellow': colors.terminal.yellow,
+    'terminal.ansiBlue': colors.terminal.blue,
+    'terminal.ansiMagenta': colors.terminal.magenta,
+    'terminal.ansiCyan': colors.terminal.cyan,
+    'terminal.ansiWhite': colors.terminal.white,
+    'terminal.ansiBrightBlack': colors.terminal.brightBlack,
+    'terminal.ansiBrightRed': colors.terminal.brightRed,
+    'terminal.ansiBrightGreen': colors.terminal.brightGreen,
+    'terminal.ansiBrightYellow': colors.terminal.brightYellow,
+    'terminal.ansiBrightBlue': colors.terminal.brightBlue,
+    'terminal.ansiBrightMagenta': colors.terminal.brightMagenta,
+    'terminal.ansiBrightCyan': colors.terminal.brightCyan,
+    'terminal.ansiBrightWhite': colors.terminal.brightWhite,
     'terminal.selectionBackground': colors.selection.background,
     'terminal.inactiveSelectionBackground': colors.selection.inactiveBackground,
   };
