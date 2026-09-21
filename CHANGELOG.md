@@ -4,6 +4,17 @@ All notable changes to the "springbok-theme" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.13.0](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.12.0...v0.13.0) (2026-09-21)
+
+
+### Features
+
+* add preformat, blockQuote, and separator styles to themes ([1114ebd](https://www.github.com/christophehurpeau/springbok-vscode-theme/commit/1114ebd81340b0a90011041aea8598c6a906ba91))
+* add workbench color configuration and update theme files ([a409c6f](https://www.github.com/christophehurpeau/springbok-vscode-theme/commit/a409c6fbc01aa2b5400cf1f70a5da3eb2e6e8848))
+* enhance markdown examples with additional formatting and structure ([e700f26](https://www.github.com/christophehurpeau/springbok-vscode-theme/commit/e700f26d2bf09cee6b09be1755f634df8affce10))
+* enhance themes with preformat and code block styles, update color configurations ([eebc0fd](https://www.github.com/christophehurpeau/springbok-vscode-theme/commit/eebc0fd726c03a899cf08fcf543587c924a58698))
+* improve light theme ([e73b87b](https://www.github.com/christophehurpeau/springbok-vscode-theme/commit/e73b87bbeda99c68ce379d3ac824d78de56b6545))
+
 ## [0.12.0](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.11.1...v0.12.0) (2025-11-23)
 
 
