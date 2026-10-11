@@ -216,7 +216,8 @@ export const createWorkbenchColors = ({
     'sideBySideEditor.horizontalBorder': colors.editor.border,
     'sideBySideEditor.verticalBorder': colors.editor.border,
     'editorGroupHeader.tabsBackground': colors.tabs.background,
-    'editorGroupHeader.connectedTabsBackground': colors.tabs.connectedBackground,
+    'editorGroupHeader.connectedTabsBackground':
+      colors.tabs.connectedBackground,
     'tab.activeBackground': colors.tabs.activeBackground,
     'tab.activeForeground': colors.foreground,
     'tab.inactiveBackground': colors.tabs.inactiveBackground,
