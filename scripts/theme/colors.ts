@@ -45,7 +45,9 @@ export const createColors = (palette: Palette, type: ThemeType) => {
 
     // must stay a step above `hoverBackground`, or hovering reads as selecting
     listSelection: {
-      background: isDark ? palette.springbok.darkest : palette.springbok.paleLight,
+      background: isDark
+        ? palette.springbok.darkest
+        : palette.springbok.paleLight,
     },
 
     /**
