@@ -8,7 +8,7 @@ machine.
 GitHub → **Actions** → **Release** → **Run workflow** on `main`, or
 `github-check-and-run-release-workflow`, which waits for CI on `main` first.
 
-- **Dry run** checked: runs typecheck and prettier, prints what
+- **Dry run** checked: runs typecheck and the oxfmt check, prints what
   [`pob-version`](https://github.com/christophehurpeau/pob/tree/main/@pob/version) would release,
   and checks the Marketplace (Entra ID) and Open VSX credentials.
 - **Dry run** unchecked: releases.

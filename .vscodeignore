@@ -1,9 +1,12 @@
 .vscode/**
 .vscode-test/**
 .github/**
+.git-hooks/**
+.claude/**
 .gitignore
-.prettierignore
 .editorconfig
+.oxfmtrc.jsonc
+lint-staged.config.js
 vsc-extension-quickstart.md
 examples/**
 # the readme links them from github, the vsix does not need the megabytes
