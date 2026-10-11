@@ -88,17 +88,18 @@ export const createWorkbenchColors = ({
 
     // -- Lists and trees --
     'list.activeSelectionForeground': colors.foreground,
+    // selection must stay a step above hover, or hovering reads as selecting
     'list.activeSelectionBackground': isDark
       ? palette.springbok.darkest
-      : palette.soil.xlight,
+      : palette.soil.light,
     'list.inactiveSelectionBackground': isDark
       ? palette.springbok.darkest
-      : palette.soil.xlight,
+      : palette.soil.light,
     'list.dropBackground': palette.springbok.light,
     'list.focusBackground': isDark
       ? palette.springbok.darkest
-      : palette.soil.xlight,
-    'list.hoverBackground': isDark ? palette.soil.darkest : palette.soil.light,
+      : palette.soil.light,
+    'list.hoverBackground': isDark ? palette.soil.darkest : palette.soil.lighter,
     'list.inactiveFocusBackground': isDark
       ? palette.springbok.dark
       : palette.springbok.light,
