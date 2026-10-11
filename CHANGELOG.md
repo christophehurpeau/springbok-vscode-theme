@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.1](https://github.com/christophehurpeau/springbok-vscode-theme/compare/v0.14.0...v0.14.1) (2026-10-11)
+
+### Bug Fixes
+
+* make list selection visible in light theme
+* unify hover colors and use accent list selection in light theme
+
 ## [0.14.0](https://github.com/christophehurpeau/springbok-vscode-theme/compare/v0.13.1...v0.14.0) (2026-10-11)
 
 ### Features
