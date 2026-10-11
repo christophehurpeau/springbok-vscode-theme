@@ -1,8 +1,19 @@
-# Change Log
+# Changelog
 
-All notable changes to the "springbok-theme" extension will be documented in this file.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [0.14.0](https://github.com/christophehurpeau/springbok-vscode-theme/compare/v0.13.1...v0.14.0) (2026-10-11)
+
+### Features
+
+* lighten light theme frame
+
+### Bug Fixes
+
+* make command center label readable in light modern ui
+* show active tab in light theme modern ui
+* stop shipping examples, previews and scripts in the vsix
 
 ## [0.12.0](https://www.github.com/christophehurpeau/springbok-vscode-theme/compare/v0.11.1...v0.12.0) (2025-11-23)
 
