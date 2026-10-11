@@ -1,7 +1,16 @@
 .vscode/**
 .vscode-test/**
+.github/**
 .gitignore
+.prettierignore
+.editorconfig
 vsc-extension-quickstart.md
-/examples
+examples/**
 # the readme links them from github, the vsix does not need the megabytes
-/previews
+previews/**
+# theme generator and screenshots; themes/*.json are committed
+scripts/**
+docs/**
+tsconfig.json
+pnpm-lock.yaml
+pnpm-workspace.yaml
