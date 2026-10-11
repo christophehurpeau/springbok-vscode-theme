@@ -184,11 +184,14 @@ export const createWorkbenchColors = ({
     'panelSection.border': colors.surface.border,
 
     // -- `workbench.experimental.modernUI` --
-    // Only the surfaces are set. The modern tab and activity bar item colors
-    // inherit from `list.inactiveSelectionBackground` / `list.hoverBackground`,
-    // which already carry the accent and the right hover ordering.
+    // The activity bar item colors inherit from `list.inactiveSelectionBackground`
+    // / `list.hoverBackground`. The tabs cannot: in light those are too close
+    // to the strip for the active tab to show. `modernEditorTab.*` inherits
+    // from `modernTab.*`.
     // `surface.background` is applied with `!important`, so it wins over
     // `editorGroupHeader.tabsBackground` for the cards' tab strips.
+    'modernTab.activeBackground': colors.tabs.activeBackground,
+    'modernTab.hoverBackground': colors.tabs.hoverBackground,
     'surface.background': colors.surface.background,
     'surface.border': colors.surface.border,
     'modernUI.shellBackground': colors.frame.background,
@@ -213,6 +216,7 @@ export const createWorkbenchColors = ({
     'sideBySideEditor.horizontalBorder': colors.editor.border,
     'sideBySideEditor.verticalBorder': colors.editor.border,
     'editorGroupHeader.tabsBackground': colors.tabs.background,
+    'editorGroupHeader.connectedTabsBackground': colors.tabs.connectedBackground,
     'tab.activeBackground': colors.tabs.activeBackground,
     'tab.activeForeground': colors.foreground,
     'tab.inactiveBackground': colors.tabs.inactiveBackground,

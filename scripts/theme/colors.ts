@@ -173,9 +173,14 @@ export const createColors = (palette: Palette, type: ThemeType) => {
       // classic UI only - modern UI forces `.title.tabs` transparent and the
       // strip shows `editor.background` instead
       background: isDark ? palette.dark.darkest : palette.white.xlight,
-      activeBackground: isDark ? palette.springbok.darkest : palette.soil.light,
+      // modern UI connected tabs: the active tab takes `editor.background` and
+      // the inactive ones this strip color, so it must differ from the editor
+      connectedBackground: isDark ? palette.dark.darkest : palette.soil.xxlight,
       inactiveBackground: isDark ? palette.dim.darkest : palette.white.xlight,
-      hoverBackground: isDark ? palette.soil.dark : palette.soil.light,
+      activeBackground: isDark ? palette.springbok.darkest : palette.soil.light,
+      // modern UI only - must stay a step below `activeBackground`, or hovering
+      // an inactive tab reads as activating it
+      hoverBackground: isDark ? palette.soil.darkest : palette.soil.lighter,
     },
 
     quickInput: {
