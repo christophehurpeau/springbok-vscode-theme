@@ -89,6 +89,7 @@ export const createPalette = (type: ThemeType) => {
       light: '#D37947', // 21°, 61%, 55%
       bright: '#ff6a14', // 22°, 100%, 54%}
       xlight: '#e0a88a', // 21°, 58%, 71%
+      paleLight: '#EDCAB6', // 22°, 60%, 82%
     },
 
     // the brand hue desaturated: the warm greys every surface is built from

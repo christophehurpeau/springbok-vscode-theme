@@ -35,8 +35,18 @@ export const createColors = (palette: Palette, type: ThemeType) => {
     inactiveForeground: isDark ? palette.dim.light : palette.dim.dark,
   };
 
+  // One hover for rows, tabs and icon buttons. Translucent because buttons also
+  // sit on the frame, where an opaque step tuned for the side bar disappears.
+  const hoverBackground = palette.soil.dark + (isDark ? '40' : '24');
+
   return {
     ...baseColors,
+    hoverBackground,
+
+    // must stay a step above `hoverBackground`, or hovering reads as selecting
+    listSelection: {
+      background: isDark ? palette.springbok.darkest : palette.springbok.paleLight,
+    },
 
     /**
      * -- Surfaces --
@@ -178,9 +188,6 @@ export const createColors = (palette: Palette, type: ThemeType) => {
       connectedBackground: isDark ? palette.dark.darkest : palette.soil.xxlight,
       inactiveBackground: isDark ? palette.dim.darkest : palette.white.xlight,
       activeBackground: isDark ? palette.springbok.darkest : palette.soil.light,
-      // modern UI only - must stay a step below `activeBackground`, or hovering
-      // an inactive tab reads as activating it
-      hoverBackground: isDark ? palette.soil.darkest : palette.soil.lighter,
     },
 
     quickInput: {
@@ -201,7 +208,6 @@ export const createColors = (palette: Palette, type: ThemeType) => {
           ? palette.springbok.dark
           : palette.springbok.xlight,
         activeForeground: isDark ? palette.white.xlight : palette.black.darkest,
-        hoverBackground: isDark ? palette.soil.dark : palette.soil.light,
       },
     },
 

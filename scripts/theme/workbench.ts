@@ -71,7 +71,7 @@ export const createWorkbenchColors = ({
     'inputOption.activeBorder': colors.input.option.activeBorder,
     'inputOption.activeBackground': colors.input.option.activeBackground,
     'inputOption.activeForeground': colors.input.option.activeForeground,
-    'inputOption.hoverBackground': colors.input.option.hoverBackground,
+    'inputOption.hoverBackground': colors.hoverBackground,
     'inputValidation.errorBorder': palette.red.dark,
     'inputValidation.errorBackground': palette.red.dark,
     'inputValidation.errorForeground': palette.white.light,
@@ -83,23 +83,16 @@ export const createWorkbenchColors = ({
     'inputValidation.warningForeground': palette.white.light,
 
     // -- Toolbars --
-    'toolbar.hoverBackground': colors.input.option.hoverBackground,
+    'toolbar.hoverBackground': colors.hoverBackground,
     'toolbar.activeBackground': colors.input.option.activeBackground,
 
     // -- Lists and trees --
     'list.activeSelectionForeground': colors.foreground,
-    // selection must stay a step above hover, or hovering reads as selecting
-    'list.activeSelectionBackground': isDark
-      ? palette.springbok.darkest
-      : palette.soil.light,
-    'list.inactiveSelectionBackground': isDark
-      ? palette.springbok.darkest
-      : palette.soil.light,
+    'list.activeSelectionBackground': colors.listSelection.background,
+    'list.inactiveSelectionBackground': colors.listSelection.background,
     'list.dropBackground': palette.springbok.light,
-    'list.focusBackground': isDark
-      ? palette.springbok.darkest
-      : palette.soil.light,
-    'list.hoverBackground': isDark ? palette.soil.darkest : palette.soil.lighter,
+    'list.focusBackground': colors.listSelection.background,
+    'list.hoverBackground': colors.hoverBackground,
     'list.inactiveFocusBackground': isDark
       ? palette.springbok.dark
       : palette.springbok.light,
@@ -192,7 +185,7 @@ export const createWorkbenchColors = ({
     // `surface.background` is applied with `!important`, so it wins over
     // `editorGroupHeader.tabsBackground` for the cards' tab strips.
     'modernTab.activeBackground': colors.tabs.activeBackground,
-    'modernTab.hoverBackground': colors.tabs.hoverBackground,
+    'modernTab.hoverBackground': colors.hoverBackground,
     'surface.background': colors.surface.background,
     'surface.border': colors.surface.border,
     'modernUI.shellBackground': colors.frame.background,
