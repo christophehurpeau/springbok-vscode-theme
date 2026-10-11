@@ -3,9 +3,9 @@ name: Commit changes on @pob/root update
 on:
   push:
     branches:
-      - 'renovate/pob-root'
-      - 'renovate/pob-root-**'
-      - 'renovate/major-pob-root'
+      - "renovate/pob-root"
+      - "renovate/pob-root-**"
+      - "renovate/major-pob-root"
 
 permissions:
   contents: write
