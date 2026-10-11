@@ -98,6 +98,7 @@ export const createPalette = (type: ThemeType) => {
       dark: '#7b6a60', // 22deg, 12%, 43%
 
       light: '#D9CAC2', // 21deg, 23%, 81%
+      paleLight: '#E0D3CD', // 21deg, 23%, 84%
       lighter: '#E4DFDD', // 17deg, 11%, 88%
       xlight: '#F6E7DE', // 23deg, 57%, 92%
       xxlight: '#F4F2F1', // 20deg, 12%, 95%

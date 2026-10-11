@@ -46,7 +46,7 @@ export const createColors = (palette: Palette, type: ThemeType) => {
      *
      *   editor  - the editor and the tab strip it belongs to     (100% / 3%)
      *   surface - side bar, menus, palette, modern UI cards      ( 95% / 9%)
-     *   frame   - title bar, activity bar, inactive tabs         ( 88% / 18%)
+     *   frame   - title bar, activity bar, inactive tabs         ( 84% / 18%)
      *
      * `bottomPanel` sits between `surface` and `editor`, see below.
      */
@@ -63,7 +63,7 @@ export const createColors = (palette: Palette, type: ThemeType) => {
     // nothing to reveal, but it shows in 2px gaps between them, so a saturated
     // color would read as a decorative border. Contrast without hue.
     frame: {
-      background: isDark ? palette.dark.darker : palette.soil.light,
+      background: isDark ? palette.dark.darker : palette.soil.paleLight,
     },
 
     // The bottom panel needs a level of its own: on `surface.background` it
