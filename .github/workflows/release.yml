@@ -1,0 +1,162 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Dry run'
+        required: true
+        type: boolean
+        default: false
+      bump:
+        description: 'Bump (auto follows conventional commits)'
+        required: true
+        type: choice
+        options: [auto, patch, minor, major]
+        default: auto
+
+permissions:
+  contents: write
+
+concurrency: release
+
+jobs:
+  version:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ssh-key: ${{ secrets.PUSH_DEPLOY_KEY }}
+          fetch-depth: 0
+          fetch-tags: true
+
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 12
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm run typecheck
+      - run: pnpm run lint:prettier
+
+      - name: New version (dry run)
+        if: inputs.dry-run
+        run: pnpm exec pob-version --dry-run $FORCE
+        env:
+          FORCE: ${{ inputs.bump != 'auto' && format('--force {0}', inputs.bump) || '' }}
+
+      - name: Configure Git user
+        if: ${{ !inputs.dry-run }}
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: New version
+        id: version
+        if: ${{ !inputs.dry-run }}
+        run: |
+          before=$(node -p 'require("./package.json").version')
+          pnpm exec pob-version $FORCE --create-release=github -m 'chore: release %v [skip ci]'
+          after=$(node -p 'require("./package.json").version')
+          if [ "$before" != "$after" ]; then
+            echo "tag=v$after" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          FORCE: ${{ inputs.bump != 'auto' && format('--force {0}', inputs.bump) || '' }}
+          POB_GIT_HOOKS: 0
+          GH_TOKEN: ${{ github.token }}
+
+  check-auth:
+    if: inputs.dry-run
+    runs-on: ubuntu-latest
+    environment: marketplace
+    permissions:
+      id-token: write
+    steps:
+      - uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
+
+      # The id to add as a member of the Marketplace publisher, see docs/PUBLISHING.md.
+      - name: Show Marketplace identity
+        run: >
+          az rest -u https://app.vssps.visualstudio.com/_apis/profile/profiles/me
+          --resource 499b84ac-1321-427f-aa17-267ca6975798
+          --query '{id: id, displayName: displayName}'
+
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 12
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Verify Open VSX token
+        run: pnpm exec ovsx verify-pat chrp
+        env:
+          OVSX_PAT: ${{ secrets.OPEN_VSX_TOKEN }}
+
+  # Separate job so "Re-run failed jobs" retries publishing from the tag
+  # without versioning again.
+  publish:
+    needs: version
+    if: needs.version.outputs.tag != ''
+    runs-on: ubuntu-latest
+    environment: marketplace
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.version.outputs.tag }}
+
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 12
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm run package:vsce --out extension.vsix
+
+      - uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
+
+      - name: Publish to VS Code Marketplace
+        run: pnpm exec vsce publish --no-dependencies --skip-duplicate --packagePath extension.vsix --azure-credential
+
+      - name: Publish to Open VSX
+        run: pnpm exec ovsx publish extension.vsix --skip-duplicate
+        env:
+          OVSX_PAT: ${{ secrets.OPEN_VSX_TOKEN }}
+
+      - name: Attach .vsix to the GitHub release
+        run: |
+          tag='${{ needs.version.outputs.tag }}'
+          cp extension.vsix "springbok-theme-${tag#v}.vsix"
+          gh release upload "$tag" "springbok-theme-${tag#v}.vsix" --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
