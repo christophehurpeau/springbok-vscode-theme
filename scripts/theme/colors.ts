@@ -206,7 +206,9 @@ export const createColors = (palette: Palette, type: ThemeType) => {
     },
 
     commandCenter: {
-      foreground: baseColors.foreground,
+      // modern UI renders the label at 60% opacity straight on the frame, so it
+      // needs the strongest foreground to stay readable
+      foreground: baseColors.activeForeground,
       activeForeground: baseColors.activeForeground,
       // Sits on `frame.background`, so it cannot reuse the input background -
       // that is the frame's own color. Only painted when modern UI is off:

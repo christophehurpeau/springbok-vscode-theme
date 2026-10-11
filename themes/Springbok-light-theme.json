@@ -91,7 +91,7 @@
     "menu.selectionBackground": "#552407",
     "menu.selectionForeground": "#383838",
     "menu.separatorBackground": "#2f2f2f",
-    "commandCenter.foreground": "#383838",
+    "commandCenter.foreground": "#080808",
     "commandCenter.activeForeground": "#080808",
     "commandCenter.background": "#fefefe",
     "commandCenter.activeBackground": "#e0a88a",
